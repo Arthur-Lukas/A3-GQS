@@ -1,4 +1,4 @@
-Equipe:
+Composição da Equipe:
 
 Arthur Lucas E. Machado – RA 324146950
 Cicera Quaresma da Silva – RA 12524150398
