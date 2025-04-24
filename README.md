@@ -1,2 +1,4 @@
-Todos os códigos desde que comecei a programar em 02/2024
+Integrantes do projeto A3 da matéria Gestão e Qualidade de software com os professores Henrique Poyatos e Adriano no semestre 1/2025
+
+Arthur Lucas Evangelista Machado - RA 324146950
 Cicera Quaresma da Silva - RA 12524150398
