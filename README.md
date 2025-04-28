@@ -15,5 +15,5 @@ Joyce Mendonça Paixão - RA 323212772
 - Criar o banco de dados (vou mandar o modelo aqui depois)
 - Mysql conector (é um drive que você baixa por aqui para fazer o programa rodar)
 
-# Quando tudo estiver instalado
+### Quando tudo estiver instalado
 É só ir na sua IDE na pasta do projeto, e no arquivo "Main", aperte "F5".
