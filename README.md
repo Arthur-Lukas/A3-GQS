@@ -1,4 +1,6 @@
-Integrantes do projeto A3 da matéria Gestão e Qualidade de software com os professores Henrique Poyatos e Adriano no semestre 1/2025
+# A3 da matéria Gestão e Qualidade de software com os professores Henrique Poyatos e Adriano no semestre 1/2025
+
+### Integrantes do projeto
 
 Arthur Lucas Evangelista Machado - RA 324146950
 Cicera - RA 12524150398
@@ -14,4 +16,4 @@ Joyce Mendonça Paixão - RA 323212772
 - Mysql conector (é um drive que você baixa por aqui para fazer o programa rodar)
 
 # Quando tudo estiver instalado
-É só ir no Main na sua IDE e apertar "F5"
+É só ir na sua IDE na pasta do projeto, e no arquivo "Main", aperte "F5".
