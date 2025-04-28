@@ -5,7 +5,7 @@ Cicera - RA 12524150398
 Iago Luiz Simplicio Serra - RA 1272320678
 Joyce Mendonça Paixão - RA 323212772
 
-#Recursos
+##Recursos
 - Xampp (para o banco de dados)
 - IDE (pode ser o VSCODE)
 - Mysql conector
