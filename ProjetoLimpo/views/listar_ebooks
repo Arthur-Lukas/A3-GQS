@@ -1,0 +1,35 @@
+<?php
+include_once '../controllers/EbookController.php';
+$ebooks = EbookController::listarEbooks();
+?>
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar E-books</title>
+</head>
+<body>
+    <h1>E-books</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Ano de Lançamento</th>
+            <th>Número de Páginas</th>
+            <th>ID do Gênero</th>
+        </tr>
+        <?php foreach ($ebooks as $ebook): ?>
+            <tr>
+                <td><?= $ebook['id'] ?></td>
+                <td><?= $ebook['titulo'] ?></td>
+                <td><?= $ebook['autor'] ?></td>
+                <td><?= $ebook['lancamento'] ?></td>
+                <td><?= $ebook['paginas'] ?></td>
+                <td><?= $ebook['genero_id'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</body>
+</html>
