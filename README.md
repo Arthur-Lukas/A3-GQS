@@ -6,6 +6,7 @@ Arthur Lucas Evangelista Machado - RA 324146950
 Cicera - RA 12524150398
 Iago Luiz Simplicio Serra - RA 1272320678
 Joyce Mendonça Paixão - RA 323212772
+Bruno Almeida Vilela - RA 323124929
 
 ## Recursos
 - Clonar ou baixar o código
