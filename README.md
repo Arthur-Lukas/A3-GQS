@@ -6,7 +6,12 @@ Iago Luiz Simplicio Serra - RA 1272320678
 Joyce Mendonça Paixão - RA 323212772
 
 ## Recursos
-- Xampp (para o banco de dados)
+- Clonar ou baixar o código
 - IDE (pode ser o VSCODE)
-- Mysql conector
 - Java JDK instalado
+- Xampp (para o banco de dados)
+- Criar o banco de dados (vou mandar o modelo aqui depois)
+- Mysql conector (é um drive que você baixa por aqui para fazer o programa rodar)
+
+# Quando tudo estiver instalado
+É só ir no Main na sua IDE e apertar "F5"
