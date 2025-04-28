@@ -5,13 +5,13 @@ include_once '../models/Ebook.php';
 class EbookController {
     public static function cadastrarEbook($titulo, $autor, $lancamento, $paginas, $genero_id) {
         $conexao = Conexao::conectar();
-        $sql = "INSERT INTO ebooks (titulo, autor, lancamento, paginas, genero_id) VALUES (:titulo, :autor, :lancamento, :paginas, :genero_id)";
+        $sql = "INSERT INTO ebooks (titulo, autor, lancamento, paginas, id_genero) VALUES (:titulo, :autor, :lancamento, :paginas, :id_genero)";
         $stmt = $conexao->prepare($sql);
         $stmt->bindParam(':titulo', $titulo);
         $stmt->bindParam(':autor', $autor);
         $stmt->bindParam(':lancamento', $lancamento);
         $stmt->bindParam(':paginas', $paginas);
-        $stmt->bindParam(':genero_id', $genero_id);
+        $stmt->bindParam(':id_genero', $id_genero);
         $stmt->execute();
     }
 

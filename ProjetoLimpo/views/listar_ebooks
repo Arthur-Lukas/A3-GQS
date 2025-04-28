@@ -27,7 +27,7 @@ $ebooks = EbookController::listarEbooks();
                 <td><?= $ebook['autor'] ?></td>
                 <td><?= $ebook['lancamento'] ?></td>
                 <td><?= $ebook['paginas'] ?></td>
-                <td><?= $ebook['genero_id'] ?></td>
+                <td><?= $ebook['id_genero'] ?></td>
             </tr>
         <?php endforeach; ?>
     </table>

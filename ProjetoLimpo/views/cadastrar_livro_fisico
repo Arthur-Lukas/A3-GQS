@@ -6,9 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $autor = $_POST['autor'];
     $lancamento = $_POST['lancamento'];
     $preco = $_POST['preco'];
-    $genero_id = $_POST['genero_id'];
+    $id_genero = $_POST['id_genero'];
 
-    LivroFisicoController::cadastrarLivroFisico($titulo, $autor, $lancamento, $preco, $genero_id);
+    LivroFisicoController::cadastrarLivroFisico($titulo, $autor, $lancamento, $preco, $id_genero);
     echo "<p>Livro cadastrado com sucesso!</p>";
 }
 ?>
@@ -34,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="preco">Preço:</label>
         <input type="number" name="preco" id="preco" step="0.01" required>
 
-        <label for="genero_id">ID do Gênero:</label>
-        <input type="number" name="genero_id" id="genero_id" required>
+        <label for="id_genero">ID do Gênero:</label>
+        <input type="number" name="id_genero" id="id_genero" required>
 
         <button type="submit">Cadastrar</button>
     </form>

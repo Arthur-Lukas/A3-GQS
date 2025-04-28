@@ -3,15 +3,15 @@ include_once '../config/Conexao.php';
 include_once '../models/LivroFisico.php';
 
 class LivroFisicoController {
-    public static function cadastrarLivroFisico($titulo, $autor, $lancamento, $preco, $genero_id) {
+    public static function cadastrarLivroFisico($titulo, $autor, $lancamento, $preco, $id_genero) {
         $conexao = Conexao::conectar();
-        $sql = "INSERT INTO livros_fisicos (titulo, autor, lancamento, preco, genero_id) VALUES (:titulo, :autor, :lancamento, :preco, :genero_id)";
+        $sql = "INSERT INTO livros_fisicos (titulo, autor, lancamento, preco, id_genero) VALUES (:titulo, :autor, :lancamento, :preco, :id_genero)";
         $stmt = $conexao->prepare($sql);
         $stmt->bindParam(':titulo', $titulo);
         $stmt->bindParam(':autor', $autor);
         $stmt->bindParam(':lancamento', $lancamento);
         $stmt->bindParam(':preco', $preco);
-        $stmt->bindParam(':genero_id', $genero_id);
+        $stmt->bindParam(':id_genero', $id_genero);
         $stmt->execute();
     }
 
@@ -22,16 +22,16 @@ class LivroFisicoController {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function editarLivroFisico($id, $titulo, $autor, $lancamento, $preco, $genero_id) {
+    public static function editarLivroFisico($id, $titulo, $autor, $lancamento, $preco, $id_genero) {
         $conexao = Conexao::conectar();
-        $sql = "UPDATE livros_fisicos SET titulo = :titulo, autor = :autor, lancamento = :lancamento, preco = :preco, genero_id = :genero_id WHERE id = :id";
+        $sql = "UPDATE livros_fisicos SET titulo = :titulo, autor = :autor, lancamento = :lancamento, preco = :preco, id_genero = :id_genero WHERE id = :id";
         $stmt = $conexao->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':titulo', $titulo);
         $stmt->bindParam(':autor', $autor);
         $stmt->bindParam(':lancamento', $lancamento);
         $stmt->bindParam(':preco', $preco);
-        $stmt->bindParam(':genero_id', $genero_id);
+        $stmt->bindParam(':id_genero', $id_genero);
         $stmt->execute();
     }
 

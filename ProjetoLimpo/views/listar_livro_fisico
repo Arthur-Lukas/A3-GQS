@@ -27,7 +27,7 @@ $livros = LivroFisicoController::listarLivrosFisicos();
                 <td><?= $livro['autor'] ?></td>
                 <td><?= $livro['lancamento'] ?></td>
                 <td><?= $livro['preco'] ?></td>
-                <td><?= $livro['genero_id'] ?></td>
+                <td><?= $livro['id_genero'] ?></td>
             </tr>
         <?php endforeach; ?>
     </table>

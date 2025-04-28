@@ -6,9 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $autor = $_POST['autor'];
     $lancamento = $_POST['lancamento'];
     $paginas = $_POST['paginas'];
-    $genero_id = $_POST['genero_id'];
+    $id_genero = $_POST['id_genero'];
 
-    EbookController::cadastrarEbook($titulo, $autor, $lancamento, $paginas, $genero_id);
+    EbookController::cadastrarEbook($titulo, $autor, $lancamento, $paginas, $id_genero);
     echo "<p>E-book cadastrado com sucesso!</p>";
 }
 ?>
@@ -34,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="paginas">Número de Páginas:</label>
         <input type="number" name="paginas" id="paginas" required>
 
-        <label for="genero_id">ID do Gênero:</label>
-        <input type="number" name="genero_id" id="genero_id" required>
+        <label for="id_genero">ID do Gênero:</label>
+        <input type="number" name="id_genero" id="id_genero" required>
 
         <button type="submit">Cadastrar</button>
     </form>
