@@ -1,8 +1,0 @@
-{
-    "java.project.sourcePaths": [
-        "ProjetoRuim\\src"
-    ],
-    "java.project.referencedLibraries": [
-        "ProjetoRuim\\resources\\mysql-connector-j-8.4.0.jar"
-    ]
-}
