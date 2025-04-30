@@ -49,14 +49,16 @@
     </header>
     <main>
         <h2>Bem-vindo ao sistema de biblioteca!</h2>
-        <p>Navegue pelas funcionalidades disponíveis:</p>
-        <a href="views/cadastrar_genero.php">Cadastrar Gênero</a>
-        <a href="views/listar_generos.php">Listar Gêneros</a>
-        <a href="views/cadastrar_livro_fisico.php">Cadastrar Livro Físico</a>
-        <a href="views/listar_livros_fisicos.php">Listar Livros Físicos</a>
-        <a href="views/cadastrar_ebook.php">Cadastrar E-book</a>
-        <a href="views/listar_ebooks.php">Listar E-books</a>
-        <a href="views/excluir_genero.php">Excluir Gênero</a>
+        <a href="views/cadastrar_genero.php">Cadastrar gênero</a>
+        <a href="views/listar_generos.php">Listar gêneros</a>
+        <a href="views/excluir_genero.php">Excluir gênero</a>
+        <br>
+        <a href="views/cadastrar_livro_fisico.php">Cadastrar livro físico</a>
+        <a href="views/listar_livros_fisicos.php">Listar livros físicos</a>
+        <a href="views/editar_livro_fisico.php">Editar livro físico</a>
+        <br>
+        <a href="views/cadastrar_ebook.php">Cadastrar e-book</a>
+        <a href="views/listar_ebooks.php">Listar e-books</a>
     </main>
     <footer>
         <p>&copy; 2025 Projeto Biblioteca</p>

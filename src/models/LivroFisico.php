@@ -14,5 +14,14 @@ class LivroFisico {
         $this->preco = $preco;
         $this->id_genero = $id_genero;
     }
+
+    public static function buscarPorId($id) {
+        $conexao = Conexao::conectar();
+        $sql = "SELECT * FROM livrosfisicos WHERE id = :id";
+        $stmt = $conexao->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
 ?>

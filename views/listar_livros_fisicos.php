@@ -1,5 +1,5 @@
 <?php
-include_once '../controllers/LivroFisicoController.php';
+include_once '../src/controllers/LivroFisicoController.php';
 $livros = LivroFisicoController::listarLivrosFisicos();
 ?>
 
