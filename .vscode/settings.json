@@ -1,0 +1,10 @@
+{
+    "java.project.sourcePaths": [
+        "ProjetoLimpo\\src"
+    ],
+    
+        "java.project.referencedLibraries": [
+            "resources/mysql-connector-j-8.4.0.jar"
+        ]
+    
+}
