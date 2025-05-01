@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal - Projeto Biblioteca</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+<script defer src="../assets/js/scripts.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Projeto Biblioteca</h1>
+    </header>
+
+    <main>
+        <h2>Bem-vindo ao sistema de biblioteca!</h2>
+        <div class="menu">
+            <h3>Gêneros</h3>
+            <button onclick="navegar('views/cadastrar_genero.php')">Cadastrar</button>
+            <button onclick="navegar('views/listar_generos.php')">Listar</button>
+            <button onclick="navegar('views/excluir_genero.php')">Excluir</button>
+        </div>
+
+        <div class="menu">
+            <h3>Livros Físicos</h3>
+            <button onclick="navegar('views/cadastrar_livro_fisico.php')">Cadastrar</button>
+            <button onclick="navegar('views/listar_livros_fisicos.php')">Listar</button>
+            <button onclick="navegar('views/editar_livro_fisico.php')">Editar</button>
+            <button onclick="navegar('views/excluir_livro_fisico.php')">Excluir</button>
+        </div>
+
+        <div class="menu">
+            <h3>E-books</h3>
+            <button onclick="navegar('views/cadastrar_ebook.php')">Cadastrar</button>
+            <button onclick="navegar('views/listar_ebooks.php')">Listar</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Projeto Biblioteca</p>
+    </footer>
+</body>
+</html>
