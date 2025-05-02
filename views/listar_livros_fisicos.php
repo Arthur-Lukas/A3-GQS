@@ -1,35 +1,64 @@
+<!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\listar_livros_fisicos.php -->
 <?php
 include_once '../src/controllers/LivroFisicoController.php';
-$livros = LivroFisicoController::listarLivrosFisicos();
+
+try {
+    $livros = LivroFisicoController::listarLivrosFisicos();
+} catch (Exception $e) {
+    $erro = "Erro ao listar livros físicos: " . htmlspecialchars($e->getMessage());
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listar Livros Físicos</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
-    <h1>Livros Físicos</h1>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Título</th>
-            <th>Autor</th>
-            <th>Ano de Lançamento</th>
-            <th>Preço</th>
-            <th>ID do Gênero</th>
-        </tr>
-        <?php foreach ($livros as $livro): ?>
-            <tr>
-                <td><?= $livro['id'] ?></td>
-                <td><?= $livro['titulo'] ?></td>
-                <td><?= $livro['autor'] ?></td>
-                <td><?= $livro['lancamento'] ?></td>
-                <td><?= $livro['preco'] ?></td>
-                <td><?= $livro['id_genero'] ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+    <header>
+        <h1>Livros Físicos Cadastrados</h1>
+    </header>
+
+    <main class="list-container">
+        <?php if (isset($erro)): ?>
+            <p class="error"><?= $erro ?></p>
+        <?php elseif (empty($livros)): ?>
+            <p class="info">Nenhum livro físico cadastrado.</p>
+        <?php else: ?>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Ano de Lançamento</th>
+                        <th>Preço</th>
+                        <th>ID do Gênero</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($livros as $livro): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($livro['id']) ?></td>
+                            <td><?= htmlspecialchars($livro['titulo']) ?></td>
+                            <td><?= htmlspecialchars($livro['autor']) ?></td>
+                            <td><?= htmlspecialchars($livro['lancamento']) ?></td>
+                            <td><?= htmlspecialchars($livro['preco']) ?></td>
+                            <td><?= htmlspecialchars($livro['id_genero']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+
+        <div class="actions">
+            <a href="../index.html" class="btn-secondary">Voltar ao Menu</a>
+        </div>
+    </main>
+
+
 </body>
 </html>

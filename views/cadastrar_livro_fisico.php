@@ -1,15 +1,34 @@
+<!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\cadastrar_livro_fisico.php -->
 <?php
 include_once '../src/controllers/LivroFisicoController.php';
+include_once '../src/controllers/GeneroController.php';
+
+$mensagem = '';
+
+try {
+    // Buscar todos os gêneros para exibição no select
+    $generos = GeneroController::listarGeneros();
+} catch (Exception $e) {
+    $mensagem = "<p class='error'>Erro ao carregar gêneros: " . htmlspecialchars($e->getMessage()) . "</p>";
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $titulo = $_POST['titulo'];
-    $autor = $_POST['autor'];
+    $titulo = trim($_POST['titulo']);
+    $autor = trim($_POST['autor']);
     $lancamento = $_POST['lancamento'];
     $preco = $_POST['preco'];
     $id_genero = $_POST['id_genero'];
 
-    LivroFisicoController::cadastrarLivroFisico($titulo, $autor, $lancamento, $preco, $id_genero);
-    echo "<p>Livro cadastrado com sucesso!</p>";
+    if (empty($titulo) || empty($autor) || empty($lancamento) || empty($preco) || empty($id_genero)) {
+        $mensagem = "<p class='error'>Todos os campos são obrigatórios!</p>";
+    } else {
+        try {
+            LivroFisicoController::cadastrarLivroFisico($titulo, $autor, $lancamento, $preco, $id_genero);
+            $mensagem = "<p class='success'>Livro cadastrado com sucesso!</p>";
+        } catch (Exception $e) {
+            $mensagem = "<p class='error'>Erro ao cadastrar livro: " . htmlspecialchars($e->getMessage()) . "</p>";
+        }
+    }
 }
 ?>
 
@@ -17,27 +36,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Livro Físico</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
-    <h1>Cadastrar Novo Livro Físico</h1>
-    <form method="POST">
-        <label for="titulo">Título:</label>
-        <input type="text" name="titulo" id="titulo" required>
+    <header>
+        <h1>Cadastrar Novo Livro Físico</h1>
+    </header>
 
-        <label for="autor">Autor:</label>
-        <input type="text" name="autor" id="autor" required>
+    <main class="form-container">
+        <?= $mensagem ?>
 
-        <label for="lancamento">Ano de Lançamento:</label>
-        <input type="number" name="lancamento" id="lancamento" required>
+        <form method="POST" class="form">
+            <label for="titulo">Título:</label>
+            <input type="text" name="titulo" id="titulo" required>
 
-        <label for="preco">Preço:</label>
-        <input type="number" name="preco" id="preco" step="0.01" required>
+            <label for="autor">Autor:</label>
+            <input type="text" name="autor" id="autor" required>
 
-        <label for="id_genero">ID do Gênero:</label>
-        <input type="number" name="id_genero" id="id_genero" required>
+            <label for="lancamento">Ano de Lançamento:</label>
+            <input type="number" name="lancamento" id="lancamento" required>
 
-        <button type="submit">Cadastrar</button>
-    </form>
+            <label for="preco">Preço:</label>
+            <input type="number" name="preco" id="preco" step="0.01" required>
+
+            <label for="id_genero">Gênero:</label>
+            <select name="id_genero" id="id_genero" required>
+                <?php if (!empty($generos)): ?>
+                    <?php foreach ($generos as $genero): ?>
+                        <option value="<?= htmlspecialchars($genero['id']) ?>"><?= htmlspecialchars($genero['nome']) ?></option>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <option value="" disabled>Nenhum gênero disponível</option>
+                <?php endif; ?>
+            </select>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Cadastrar</button>
+                <a href="../index.html" class="btn-secondary">Voltar ao Menu</a>
+            </div>
+        </form>
+    </main>
+
+
 </body>
 </html>

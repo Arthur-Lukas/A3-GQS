@@ -1,31 +1,30 @@
+<!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\excluir_livro_fisico.php -->
 <?php
-include_once __DIR__ . '/../src/config/Conexao.php';
 include_once __DIR__ . '/../src/controllers/LivroFisicoController.php';
 
-// Buscar todos os livros físicos para exibição
-$livros = LivroFisicoController::listarLivrosFisicos();
 $mensagem = '';
+
+try {
+    // Buscar todos os livros físicos para exibição
+    $livros = LivroFisicoController::listarLivrosFisicos();
+} catch (Exception $e) {
+    $mensagem = "<p class='error'>Erro ao listar livros físicos: " . htmlspecialchars($e->getMessage()) . "</p>";
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'] ?? null;
 
     if ($id) {
-        // Verificar se o livro existe
-        $livroExiste = LivroFisicoController::buscarPorId($id);
-
-        if (!$livroExiste || isset($livroExiste['error'])) {
-            $mensagem = "<p style='color: red;'>ID inválido! O livro físico não existe no banco de dados.</p>";
-        } else {
-            $resultado = LivroFisicoController::excluirLivroFisico($id);
-
-            if (is_array($resultado) && isset($resultado['error'])) {
-                $mensagem = "<p style='color: red;'>Erro: " . $resultado['error'] . "</p>";
-            } else {
-                $mensagem = "<p style='color: green;'>Livro físico excluído com sucesso!</p>";
-            }
+        try {
+            LivroFisicoController::excluirLivroFisico($id);
+            $mensagem = "<p class='success'>Livro físico excluído com sucesso!</p>";
+            // Atualizar a lista de livros após exclusão
+            $livros = LivroFisicoController::listarLivrosFisicos();
+        } catch (Exception $e) {
+            $mensagem = "<p class='error'>Erro ao excluir livro físico: " . htmlspecialchars($e->getMessage()) . "</p>";
         }
     } else {
-        $mensagem = "<p style='color: red;'>ID inválido.</p>";
+        $mensagem = "<p class='error'>ID inválido.</p>";
     }
 }
 ?>
@@ -34,37 +33,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excluir Livro Físico</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Excluir Livro Físico</h2>
+    <header>
+        <h1>Excluir Livro Físico</h1>
+    </header>
+
+    <main class="form-container">
         <?= $mensagem ?>
 
-        <form method="post">
-            <label for="id">Digite o ID do livro físico para excluir:</label>
-            <input type="number" name="id" required>
-            <button type="submit">Excluir Livro</button>
+        <form method="POST" class="form">
+            <label for="id">Selecione o Livro Físico para excluir:</label>
+            <select name="id" id="id" required>
+                <?php if (!empty($livros)): ?>
+                    <?php foreach ($livros as $livro): ?>
+                        <option value="<?= htmlspecialchars($livro['id']) ?>"><?= htmlspecialchars($livro['titulo']) ?></option>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <option value="" disabled>Nenhum livro físico disponível</option>
+                <?php endif; ?>
+            </select>
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Excluir Livro</button>
+                <a href="../index.html" class="btn-secondary">Voltar ao Menu</a>
+            </div>
         </form>
 
         <h3>Lista de Livros Físicos Disponíveis:</h3>
-        <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Autor</th>
-            </tr>
-            <?php foreach ($livros as $livro): ?>
-                <tr>
-                    <td><?= $livro['id'] ?></td>
-                    <td><?= $livro['titulo'] ?></td>
-                    <td><?= $livro['autor'] ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
+        <?php if (empty($livros)): ?>
+            <p class="info">Nenhum livro físico cadastrado.</p>
+        <?php else: ?>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Autor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($livros as $livro): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($livro['id']) ?></td>
+                            <td><?= htmlspecialchars($livro['titulo']) ?></td>
+                            <td><?= htmlspecialchars($livro['autor']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+    </main>
 
-        <a href="listar_livros_fisicos.php" class="btn-voltar">Voltar para Lista</a>
-    </div>
+
 </body>
 </html>
