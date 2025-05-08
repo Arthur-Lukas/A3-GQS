@@ -1,9 +1,8 @@
 {
-
     "java.project.sourcePaths": [
-        "ProjetoRuim\\src"
+        "src"
     ],
     "java.project.referencedLibraries": [
-        "c:\\Users\\Happy\\OneDrive\\Área de Trabalho\\A3 - GQS\\ProjetoRuim\\resources\\mysql-connector-j-8.4.0.jar"
-
+        "resources\\mysql-connector-j-8.4.0.jar"
+    ]
 }
