@@ -58,7 +58,5 @@ try {
             <a href="../index.html" class="btn-secondary">Voltar ao Menu</a>
         </div>
     </main>
-
-
 </body>
 </html>
