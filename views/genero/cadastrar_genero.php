@@ -41,11 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-actions">
                 <button type="submit" class="btn-primary">Cadastrar</button>
                 <a href="../index.html" class="btn-secondary">Voltar</a>
-                <a href="listar_generos.php" class="btn-secondary">Lista de Gêneros</a>
+                <a href="../genero/cadastrar_genero.php" class="btn-secondary">Lista de Gêneros</a>
             </div>
         </form>
     </main>
-
-
 </body>
 </html>
