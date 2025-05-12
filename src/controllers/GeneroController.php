@@ -1,6 +1,6 @@
 <?php
-include_once '../src/config/Conexao.php';
-include_once '../src/models/Genero.php';
+include_once '../../src/config/Conexao.php';
+include_once '../../src/models/Genero.php';
 
 class GeneroController {
     public static function cadastrarGenero($nome) {

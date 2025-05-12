@@ -1,6 +1,6 @@
 <?php
-include_once '../src/config/Conexao.php';
-include_once '../src/models/LivroFisico.php';
+include_once '../../src/config/Conexao.php';
+include_once '../../src/models/LivroFisico.php';
 
 class LivroFisicoController {
     public static function cadastrarLivroFisico($titulo, $autor, $lancamento, $preco, $id_genero) {

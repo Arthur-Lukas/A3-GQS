@@ -1,6 +1,6 @@
 <!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\excluir_ebook.php -->
 <?php
-include_once '../src/controllers/EbookController.php';
+include_once '../../src/controllers/EbookController.php';
 
 $mensagem = '';
 
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excluir E-book</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
 </head>
 <body>
     <header>
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </select>
             <div class="form-actions">
                 <button type="submit" class="btn-primary">Excluir E-book</button>
-                <a href="../index.html" class="btn-secondary">Voltar ao Menu</a>
+                <a href="../../index.html" class="btn-secondary">Voltar ao Menu</a>
             </div>
         </form>
 
@@ -86,7 +86,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </table>
         <?php endif; ?>
     </main>
-
-
 </body>
 </html>

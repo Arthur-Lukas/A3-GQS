@@ -1,7 +1,7 @@
 <!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\editar_ebook.php -->
 <?php
-include_once '../src/controllers/EbookController.php';
-include_once '../src/controllers/GeneroController.php';
+include_once '../../src/controllers/EbookController.php';
+include_once '../../src/controllers/GeneroController.php';
 
 $mensagem = '';
 $ebooks = [];
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar E-book</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
 </head>
 <body>
     <header>
@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <div class="actions">
-            <a href="../index.html" class="btn-secondary">Voltar ao Menu</a>
+            <a href="../../index.html" class="btn-secondary">Voltar ao Menu</a>
         </div>
     </main>
 </body>

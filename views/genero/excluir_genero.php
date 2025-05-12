@@ -1,8 +1,8 @@
 <!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\excluir_genero.php -->
 <?php
-include_once __DIR__ . '/../src/config/Conexao.php';
-include_once __DIR__ . '/../src/controllers/GeneroController.php';
-include_once __DIR__ . '/../src/controllers/LivroFisicoController.php';
+include_once '../../src/config/Conexao.php';
+include_once '../../src/controllers/GeneroController.php';
+include_once '../../src/controllers/LivroFisicoController.php';
 
 $mensagem = '';
 
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excluir Gênero</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
 </head>
 <body>
     <header>
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="number" name="id" id="id" aria-label="ID do Gênero" required>
             <div class="form-actions">
                 <button type="submit" class="btn-primary">Excluir Gênero</button>
-                <a href="../index.html" class="btn-secondary">Voltar ao Menu</a>
+                <a href="../../index.html" class="btn-secondary">Voltar ao Menu</a>
             </div>
         </form>
 

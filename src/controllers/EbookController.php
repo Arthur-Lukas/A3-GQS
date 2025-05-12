@@ -1,6 +1,6 @@
 <?php
-include_once '../src/config/Conexao.php';
-include_once '../src/models/Ebook.php';
+include_once '../../src/config/Conexao.php';
+include_once '../../src/models/Ebook.php';
 
 class EbookController {
     public static function cadastrarEbook($titulo, $autor, $lancamento, $paginas, $id_genero) {

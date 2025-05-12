@@ -9,12 +9,10 @@
 </head>
 <body>
     <header>
-        <h1>Projeto Biblioteca</h1>
+        <h1>Bem-vindo a sua biblioteca pessoal!</h1>
     </header>
 
     <main>
-        <h2>Bem-vindo ao sistema de biblioteca!</h2>
-        <img src="imagem/1722.jpg" alt="Projeto Biblioteca">
         <div class="menu">
             <h3>Gêneros</h3>
             <button onclick="navegar('views/genero/cadastrar_genero.php')">Cadastrar</button>
@@ -25,18 +23,19 @@
         <div class="menu">
             <h3>Livros Físicos</h3>
             <button onclick="navegar('views/livro_fisico/cadastrar_livro_fisico.php')">Cadastrar</button>
-            <button onclick="navegar('views/listar_livros_fisicos.php')">Listar</button>
-            <button onclick="navegar('views/editar_livro_fisico.php')">Editar</button>
-            <button onclick="navegar('views/excluir_livro_fisico.php')">Excluir</button>
+            <button onclick="navegar('views/livro_fisico/listar_livros_fisicos.php')">Listar</button>
+            <button onclick="navegar('views/livro_fisico/editar_livro_fisico.php')">Editar</button>
+            <button onclick="navegar('views/livro_fisico/excluir_livro_fisico.php')">Excluir</button>
         </div>
 
         <div class="menu">
             <h3>E-books</h3>
-            <button onclick="navegar('views/cadastrar_ebook.php')">Cadastrar</button>
-            <button onclick="navegar('views/listar_ebooks.php')">Listar</button>
-            <button onclick="navegar('views/editar_ebook.php')">Editar</button>
-            <button onclick="navegar('views/excluir_ebook.php')">Excluir</button>
+            <button onclick="navegar('views/ebook/cadastrar_ebook.php')">Cadastrar</button>
+            <button onclick="navegar('views/ebook/listar_ebooks.php')">Listar</button>
+            <button onclick="navegar('views/ebook/editar_ebook.php')">Editar</button>
+            <button onclick="navegar('views/ebook/excluir_ebook.php')">Excluir</button>
         </div>
+
     </main>
 </body>
 </html>

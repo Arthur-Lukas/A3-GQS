@@ -1,6 +1,5 @@
-<!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\cadastrar_genero.php -->
 <?php
-include_once '../src/controllers/GeneroController.php';
+include_once '../../src/controllers/GeneroController.php';
 
 $mensagem = '';
 
@@ -26,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Gênero</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="/ProjetoLimpo/assets/css/styles.css">
 </head>
 <body>
     <header>
@@ -40,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="nome" id="nome" aria-label="Nome do Gênero" required>
             <div class="form-actions">
                 <button type="submit" class="btn-primary">Cadastrar</button>
-                <a href="../index.html" class="btn-secondary">Voltar</a>
-                <a href="../genero/cadastrar_genero.php" class="btn-secondary">Lista de Gêneros</a>
+                <a href="../../index.html" class="btn-secondary">Voltar</a>
+                <a href="listar_generos.php" class="btn-secondary">Lista de Gêneros</a>
             </div>
         </form>
     </main>
