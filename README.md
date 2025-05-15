@@ -10,9 +10,7 @@ O projeto foi desenvolvido com foco em boas práticas de programação, separaç
 
 ## Funcionalidades
 
-- Cadastro, listagem, edição e exclusão de gêneros literários
-- Cadastro, listagem, edição e exclusão de livros físicos
-- Cadastro, listagem, edição e exclusão de e-books
+- Cadastro, listagem, edição e exclusão para as entidades: gêneros literários, livros físicos e e-books
 - Interface web simples e responsiva
 
 ---
