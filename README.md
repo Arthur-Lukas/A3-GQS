@@ -35,7 +35,7 @@ O projeto foi desenvolvido com foco em boas práticas de programação, separaç
 3. **Crie o banco de dados**
    - Acesse o [phpMyAdmin](http://localhost/phpmyadmin)
    - Crie um banco de dados chamado `db_biblioteca` 
-   - Importe o arquivo SQL fornecido no repositório (ex: `banco.sql`) para criar as tabelas necessárias
+   - Copie o script do banco de dados na pasta do repositório (script_sql)
 
 4. **Configure a conexão com o banco de dados**
    - Abra o arquivo `src/config/Conexao.php`
