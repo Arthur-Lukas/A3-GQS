@@ -30,20 +30,16 @@ O projeto foi desenvolvido com foco em boas práticas de programação, separaç
    git clone https://github.com/seu-usuario/ProjetoLimpo.git
 2. **Coloque a pasta do projeto no diretório do seu servidor local**
    - Exemplo para XAMPP:  
-     Copie a pasta `ProjetoLimpo` para `C:\xampp\htdocs\`
+   - Copie a pasta `ProjetoLimpo` para `C:\xampp\htdocs\`
 
 3. **Crie o banco de dados**
    - Acesse o [phpMyAdmin](http://localhost/phpmyadmin)
    - Crie um banco de dados chamado `db_biblioteca` 
-   - Copie o script do banco de dados na pasta do repositório (script_sql)
+   - Importe o script do banco de dados na pasta do repositório (script_sql)
 
-4. **Configure a conexão com o banco de dados**
-   - Abra o arquivo `src/config/Conexao.php`
-   - Ajuste as variáveis de conexão (`host`, `dbname`, `user`, `password`) conforme seu ambiente
+4. **Inicie o servidor Apache e MySQL pelo XAMPP**
 
-5. **Inicie o servidor Apache e MySQL pelo XAMPP**
-
-6. **Acesse o sistema**
+5. **Acesse o sistema**
    - No navegador, acesse:  
      [http://localhost/ProjetoLimpo/index.html](http://localhost/ProjetoLimpo/index.html)](http://localhost/ProjetoLimpo/)
 
