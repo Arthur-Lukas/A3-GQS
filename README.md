@@ -41,7 +41,7 @@ O projeto foi criado como exercício acadêmico para aplicar boas práticas de C
 
 1. **Clone o repositório**
    ```bash
-   git clone [git@github.com:Arthur-Lukas/A3-GQS.git](https://github.com/Arthur-Lukas/A3-GQS.git)
+   git clone  https://github.com/Arthur-Lukas/A3-GQS.git
 
 Importe o projeto na sua IDE
 
