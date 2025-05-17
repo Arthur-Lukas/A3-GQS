@@ -27,7 +27,7 @@ O projeto foi desenvolvido com foco em boas práticas de programação, separaç
 
 1. **Clone o repositório**
    ```bash
-   git clone https://github.com/seu-usuario/ProjetoLimpo.git
+   git clone  https://github.com/Arthur-Lukas/A3-GQS.git
 2. **Coloque a pasta do projeto no diretório do seu servidor local**
    - Exemplo para XAMPP:  
    - Copie a pasta `ProjetoLimpo` para `C:\xampp\htdocs\`
