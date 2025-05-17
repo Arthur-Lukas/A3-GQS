@@ -22,15 +22,13 @@ class LivroFisicoController {
     }
 
     public static function listarLivrosFisicos() {
-        try {
-            $conexao = Conexao::conectar();
-            $sql = "SELECT * FROM livrosfisicos ORDER BY id";
-            $stmt = $conexao->query($sql);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            error_log("Erro ao listar livros físicos: " . $e->getMessage());
-            return [];
-        }
+        $conexao = Conexao::conectar();
+        $sql = "SELECT lf.*, g.nome AS nome_genero
+                FROM livrosfisicos lf
+                JOIN genero g ON lf.id_genero = g.id";
+        $stmt = $conexao->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function editarLivroFisico($id, $titulo, $autor, $lancamento, $preco, $id_genero) {

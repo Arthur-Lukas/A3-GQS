@@ -36,7 +36,7 @@ try {
                         <th>Autor</th>
                         <th>Ano de Lançamento</th>
                         <th>Número de Páginas</th>
-                        <th>ID do Gênero</th>
+                        <th>Gênero</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,7 +47,7 @@ try {
                             <td><?= htmlspecialchars($ebook['autor']) ?></td>
                             <td><?= htmlspecialchars($ebook['lancamento']) ?></td>
                             <td><?= htmlspecialchars($ebook['paginas']) ?></td>
-                            <td><?= htmlspecialchars($ebook['id_genero']) ?></td>
+                            <td><?= htmlspecialchars($ebook['nome_genero']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

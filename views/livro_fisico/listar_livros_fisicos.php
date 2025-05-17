@@ -36,7 +36,7 @@ try {
                         <th>Autor</th>
                         <th>Ano de Lançamento</th>
                         <th>Preço</th>
-                        <th>ID do Gênero</th>
+                        <th>Gênero</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,7 +47,7 @@ try {
                             <td><?= htmlspecialchars($livro['autor']) ?></td>
                             <td><?= htmlspecialchars($livro['lancamento']) ?></td>
                             <td><?= htmlspecialchars($livro['preco']) ?></td>
-                            <td><?= htmlspecialchars($livro['id_genero']) ?></td>
+                            <td><?= htmlspecialchars($livro['nome_genero']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

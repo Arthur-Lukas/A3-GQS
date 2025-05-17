@@ -22,15 +22,13 @@ class EbookController {
     }
 
     public static function listarEbooks() {
-        try {
-            $conexao = Conexao::conectar();
-            $sql = "SELECT * FROM ebooks ORDER BY id";
-            $stmt = $conexao->query($sql);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            error_log("Erro ao listar eBooks: " . $e->getMessage());
-            return [];
-        }
+        $conexao = Conexao::conectar();
+        $sql = "SELECT e.*, g.nome AS nome_genero
+                FROM ebooks e
+                JOIN genero g ON e.id_genero = g.id";
+        $stmt = $conexao->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function editarEbook($id, $titulo, $autor, $lancamento, $paginas, $id_genero) {
