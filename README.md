@@ -41,15 +41,15 @@ O projeto foi criado como exercício acadêmico para aplicar boas práticas de C
 
 1. **Clone o repositório**
    ```bash
-   git clone https://github.com/seu-usuario/BibliotecaJava.git
+   git clone [git@github.com:Arthur-Lukas/A3-GQS.git](https://github.com/Arthur-Lukas/A3-GQS.git)
 
 Importe o projeto na sua IDE
 
 Abra o Eclipse (ou outra IDE) e importe o projeto como um projeto Java existente.
 Configure o banco de dados
 
-Crie um banco de dados chamado biblioteca no MySQL.
-Importe o arquivo banco.sql (fornecido no repositório) para criar as tabelas necessárias.
+Crie um banco de dados chamado db_biblioteca no MySQL.
+Importe o arquivo db_biblioteca que está na pasta script.sql.
 Configure a conexão JDBC
 
 Baixe o driver JDBC (Connector/J) e adicione ao classpath do projeto.
@@ -57,23 +57,5 @@ No arquivo de configuração/conexão (ex: Conexao.java), ajuste as variáveis d
 Compile e execute o projeto
 
 Execute a classe Main.java para iniciar o sistema.
-
-BibliotecaJava/
-├── src/
-│   ├── aplication/
-│   │   └── Main.java
-│   ├── dao/
-│   │   ├── EbookDao.java
-│   │   ├── GeneroDao.java
-│   │   └── LivFisDao.java
-│   ├── model/
-│   │   ├── Ebook.java
-│   │   ├── Genero.java
-│   │   ├── Livro.java
-│   │   └── LivroFisico.java
-│   └── config/
-│       └── Conexao.java
-├── banco.sql
-└── [README.md](http://_vscodecontentref_/0)
 
 Adapte o nome do banco, arquivos e o link do repositório conforme necessário!
