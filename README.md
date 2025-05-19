@@ -42,7 +42,7 @@ O projeto foi desenvolvido com foco em boas práticas de programação,utilizand
 
 5. **Acesse o sistema**
    - No navegador, acesse:  
-     [http://localhost/ProjetoLimpo/index.html](http://localhost/ProjetoLimpo/index.html)]
+     [http://localhost/ProjetoLimpo/index.html](http://localhost/ProjetoLimpo/index.html)
 
 ---
 
