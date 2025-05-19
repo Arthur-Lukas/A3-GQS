@@ -33,16 +33,16 @@ O projeto foi desenvolvido com foco em boas práticas de programação,utilizand
    - Exemplo para XAMPP:  
    - Copie a pasta `ProjetoLimpo` para `C:\xampp\htdocs\`
 
-3. **Crie o banco de dados**
+3. **Inicie o servidor Apache e MySQL pelo XAMPP**
+
+4. **Crie o banco de dados**
    - Acesse o [phpMyAdmin](http://localhost/phpmyadmin)
    - Crie um banco de dados chamado `db_biblioteca` 
    - Importe o script do banco de dados na pasta do repositório (script_sql)
 
-4. **Inicie o servidor Apache e MySQL pelo XAMPP**
-
 5. **Acesse o sistema**
    - No navegador, acesse:  
-     [http://localhost/ProjetoLimpo/index.html](http://localhost/ProjetoLimpo/index.html)](http://localhost/ProjetoLimpo/)
+     [http://localhost/ProjetoLimpo/index.html](http://localhost/ProjetoLimpo/index.html)]
 
 ---
 
