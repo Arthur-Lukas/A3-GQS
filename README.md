@@ -15,15 +15,14 @@
 
 Este projeto é um sistema de gerenciamento de biblioteca pessoal desenvolvido em **Java** utilizando o paradigma de **Programação Orientada a Objetos (POO)** e integração com banco de dados **MySQL**. O sistema permite cadastrar, listar, editar e excluir gêneros, livros físicos e e-books, demonstrando conceitos como herança, polimorfismo, encapsulamento e uso de DAO para persistência.
 
-O projeto foi criado como exercício acadêmico para aplicar boas práticas de Clean Code, modularização e princípios SOLID.
+O projeto foi criado como exercício acadêmico para aplicar conhecimentos básicos em linguagem e lógica de programação.
 
 ---
 
 ## Funcionalidades
 
-- Cadastro, listagem, edição e exclusão de gêneros literários
-- Cadastro, listagem, edição e exclusão de livros físicos
-- Cadastro, listagem, edição e exclusão de e-books
+- Cadastro, listagem e exclusão de gêneros literários
+- Cadastro, listagem, edição e exclusão de livros físicos e e-books
 - Interface via JOptionPane para interação com o usuário
 
 ---
@@ -32,26 +31,22 @@ O projeto foi criado como exercício acadêmico para aplicar boas práticas de C
 
 - [Java JDK 8+](https://www.oracle.com/java/technologies/downloads/)
 - [MySQL Server](https://dev.mysql.com/downloads/mysql/)
-- [Eclipse](https://www.eclipse.org/) ou outra IDE Java (opcional)
+- [Eclipse](https://www.eclipse.org/) ou outra IDE Java
+- [XAMPP](https://www.apachefriends.org/pt_br/index.html) ou outro servidor local com suporte a PHP e MySQL
 - [Connector/J (JDBC Driver)](https://dev.mysql.com/downloads/connector/j/)
 
 ---
 
 ## Instalação e Execução
 
-1. **Clone o repositório**
+1. **Clone o repositório** (caso já tenha feito, pule para a próxima etapa)
    ```bash
-   git clone  https://github.com/Arthur-Lukas/A3-GQS.git
+   git clone  https://github.com/Arthur-Lukas/A3-GQS.git 
 
-Importe o projeto na sua IDE
-
-Abra o Eclipse (ou outra IDE) e importe o projeto como um projeto Java existente.
-Configure o banco de dados
-
-Crie um banco de dados chamado db_biblioteca no MySQL.
+2. Crie um banco de dados chamado db_biblioteca no MySQL. (caso já tenha feito, pule para a próxima etapa)
 Importe o arquivo db_biblioteca que está na pasta script.sql.
-Configure a conexão JDBC
 
+3. Configure a conexão JDBC
 Baixe o driver JDBC (Connector/J) e adicione ao classpath do projeto.
 No arquivo de configuração/conexão (ex: Conexao.java), ajuste as variáveis de conexão (host, database, user, password) conforme seu ambiente.
 Compile e execute o projeto
