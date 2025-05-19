@@ -1,4 +1,4 @@
-# A3 da matéria Gestão e Qualidade de software com os professores Henrique Poyatos e Adriano no semestre 1/2025
+# A3 da matéria Gestão e Qualidade de software com os professores Henrique Poyatos e Magda no semestre 1/2025
 
 ### Integrantes do projeto
 
