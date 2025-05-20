@@ -39,7 +39,7 @@ O projeto foi criado como exercício acadêmico para aplicar conhecimentos bási
 
 ## Instalação e Execução
 
-1. **Clone o repositório**: (caso já tenha feito, pule para a próxima etapa)
+1. <u>**Clone o repositório**:</u> (caso já tenha feito, pule para a próxima etapa)
    ```bash
    git clone  https://github.com/Arthur-Lukas/A3-GQS.git 
 
