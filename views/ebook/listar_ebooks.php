@@ -1,4 +1,3 @@
-<!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\listar_ebooks.php -->
 <?php
 include_once '../../src/controllers/EbookController.php';
 

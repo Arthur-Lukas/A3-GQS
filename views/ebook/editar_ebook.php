@@ -1,4 +1,3 @@
-<!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\editar_ebook.php -->
 <?php
 include_once '../../src/controllers/EbookController.php';
 include_once '../../src/controllers/GeneroController.php';
@@ -84,11 +83,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="form-actions">
                     <button type="submit" class="btn-primary">Atualizar E-book</button>
-                    <a href="../index.html" class="btn-secondary">Voltar ao Menu</a>
+                    <a href="../../index.html" class="btn-secondary">Voltar ao Menu</a>
                 </div>
             </form>
         <?php endif; ?>
-
+            <br>
         <h3>Lista de E-books Cadastrados</h3>
         <?php if (empty($ebooks)): ?>
             <p class="info">Nenhum e-book cadastrado.</p>

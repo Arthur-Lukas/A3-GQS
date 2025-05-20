@@ -1,4 +1,3 @@
-<!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\excluir_genero.php -->
 <?php
 include_once '../../src/config/Conexao.php';
 include_once '../../src/controllers/GeneroController.php';
@@ -62,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <a href="../../index.html" class="btn-secondary">Voltar ao Menu</a>
             </div>
         </form>
-
+        <br>
         <h3>Lista de Gêneros Disponíveis:</h3>
         <?php if (empty($generos)): ?>
             <p class="info">Nenhum gênero cadastrado.</p>

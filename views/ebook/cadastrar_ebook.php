@@ -1,4 +1,3 @@
-<!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\cadastrar_ebook.php -->
 <?php
 include_once '../../src/controllers/EbookController.php';
 include_once '../../src/controllers/GeneroController.php';
@@ -19,7 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $paginas = $_POST['paginas'];
     $id_genero = $_POST['id_genero'];
 
-    if (empty($titulo) || empty($autor) || empty($lancamento) || empty($paginas) || empty($id_genero)) {
+    // Validação: autor só pode conter letras, espaços e caracteres especiais comuns de nomes
+    if (!preg_match('/^[\p{L}\s\'\-\.]+$/u', $autor)) {
+        $mensagem = "<p class='error'>O campo Autor deve conter apenas letras, espaços, apóstrofos, hífens e pontos!</p>";
+    } elseif (empty($titulo) || empty($autor) || empty($lancamento) || empty($paginas) || empty($id_genero)) {
         $mensagem = "<p class='error'>Todos os campos são obrigatórios!</p>";
     } else {
         try {

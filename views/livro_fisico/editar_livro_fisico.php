@@ -1,4 +1,3 @@
-<!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\editar_livro_fisico.php -->
 <?php
 include_once '../../src/controllers/LivroFisicoController.php';
 include_once '../../src/controllers/GeneroController.php';
@@ -88,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </form>
         <?php endif; ?>
-
+        <br>    
         <h3>Lista de Livros Físicos Cadastrados</h3>
         <?php if (empty($livros)): ?>
             <p class="info">Nenhum livro físico cadastrado.</p>

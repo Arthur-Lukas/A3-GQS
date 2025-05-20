@@ -1,4 +1,3 @@
-<!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\excluir_ebook.php -->
 <?php
 include_once '../../src/controllers/EbookController.php';
 
@@ -62,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </form>
 
+        <br>
         <h3>Lista de E-books Disponíveis:</h3>
         <?php if (empty($ebooks)): ?>
             <p class="info">Nenhum e-book cadastrado.</p>

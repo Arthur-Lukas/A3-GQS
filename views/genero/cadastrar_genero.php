@@ -6,7 +6,10 @@ $mensagem = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = trim($_POST['nome']);
 
-    if (empty($nome)) {
+    // Validação: nome só pode conter letras, espaços e caracteres especiais comuns de nomes
+    if (!preg_match('/^[\p{L}\s\'\-\.]+$/u', $nome)) {
+        $mensagem = "<p class='error'>O nome do gênero deve conter apenas letras, espaços, apóstrofos, hífens e pontos!</p>";
+    } elseif (empty($nome)) {
         $mensagem = "<p class='error'>O nome do gênero é obrigatório!</p>";
     } else {
         try {

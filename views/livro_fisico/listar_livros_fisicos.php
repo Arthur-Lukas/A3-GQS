@@ -1,4 +1,3 @@
-<!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\listar_livros_fisicos.php -->
 <?php
 include_once '../../src/controllers/LivroFisicoController.php';
 

@@ -1,4 +1,3 @@
-<!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\excluir_livro_fisico.php -->
 <?php
 include_once '../../src/controllers/LivroFisicoController.php';
 
@@ -61,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <a href="../../index.html" class="btn-secondary">Voltar ao Menu</a>
             </div>
         </form>
-
+        <br>                
         <h3>Lista de Livros Físicos Disponíveis:</h3>
         <?php if (empty($livros)): ?>
             <p class="info">Nenhum livro físico cadastrado.</p>

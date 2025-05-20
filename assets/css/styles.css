@@ -1,111 +1,119 @@
-/* Configurações gerais */
-body {
-    font-family: Arial, sans-serif;
+/* Reset básico */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f4f6fb;
+    color: #222;
+    min-height: 100vh;
+}
+
+/* Cabeçalho */
+header {
+    background: linear-gradient(90deg, #0078d7 60%, #005aa7 100%);
+    color: #fff;
+    padding: 30px 0 20px 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 2.2em;
+    margin-bottom: 10px;
+}
+
+/* Menus principais */
+.menu {
+    background-color: #fff;
+    padding: 20px 15px;
+    margin: 18px auto;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
     text-align: center;
 }
 
-/* Estilização do cabeçalho */
-header {
-    background-color: #0078d7;
-    color: white;
-    padding: 15px;
-    font-size: 22px;
+.menu h3 {
+    margin-bottom: 15px;
+    color: #0078d7;
+    font-size: 1.3em;
+    letter-spacing: 1px;
 }
 
-/* Container do menu */
-.menu {
-    background-color: white;
-    padding: 15px;
-    margin: 10px auto;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Botões estilizados */
-button {
+.menu button {
     background-color: #0078d7;
-    color: white;
+    color: #fff;
     border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    font-size: 16px;
+    padding: 10px 22px;
+    margin: 7px 5px;
+    font-size: 1em;
     cursor: pointer;
     border-radius: 5px;
-    transition: 0.3s;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
-button:hover {
+.menu button:hover {
     background-color: #005aa7;
-}
-
-/* Rodapé */
-footer {
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-/* Responsividade */
-@media (max-width: 600px) {
-    .menu {
-        width: 90%;
-    }
-
-    button {
-        width: 100%;
-        padding: 12px;
-    }
+    transform: translateY(-2px) scale(1.04);
 }
 
 /* Container do formulário */
 .form-container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 25px auto;
+    padding: 25px 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
 }
 
 /* Estilo do formulário */
 .form label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
+    margin-bottom: 7px;
+    font-weight: 600;
+    color: #0078d7;
 }
 
 .form input, .form select {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
+    margin-bottom: 18px;
+    border: 1px solid #b3c6e0;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 1em;
+    background: #f8fafc;
+    transition: border 0.2s;
 }
 
-/* Botões */
+.form input:focus, .form select:focus {
+    border-color: #0078d7;
+    outline: none;
+}
+
 .form-actions {
     display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
+    justify-content: flex-end;
+    gap: 10px;
 }
 
 .btn-primary {
     background-color: #0078d7;
-    color: white;
-    padding: 10px 20px;
+    color: #fff;
+    padding: 10px 22px;
     border-radius: 5px;
     text-decoration: none;
-    font-size: 16px;
-    transition: background-color 0.3s;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
 .btn-primary:hover {
@@ -114,12 +122,14 @@ footer {
 
 .btn-secondary {
     background-color: #ccc;
-    color: black;
-    padding: 10px 20px;
+    color: #222;
+    padding: 10px 22px;
     border-radius: 5px;
     text-decoration: none;
-    font-size: 16px;
-    transition: background-color 0.3s;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
 .btn-secondary:hover {
@@ -128,31 +138,46 @@ footer {
 
 /* Mensagens */
 .success {
-    color: green;
-    font-weight: bold;
+    color: #1e7e34;
+    background: #e6f9ea;
+    border-left: 4px solid #28a745;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: 600;
     margin-bottom: 15px;
 }
 
 .error {
-    color: red;
-    font-weight: bold;
+    color: #a71d2a;
+    background: #fdeaea;
+    border-left: 4px solid #dc3545;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: 600;
     margin-bottom: 15px;
 }
 
 .info {
-    color: #555;
-    font-weight: bold;
-    margin-bottom: 15px;
+    display: block;
+    margin: 0 auto 20px auto;
+    color: #000000;
+    font-size: 1.1em;
+    background: #cedbf495;
+    padding: 12px 18px;
+    border-left: 5px solid #0078d7;
+    border-radius: 4px;
+    max-width: 600px;
 }
 
 /* Container da lista */
 .list-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 25px auto;
+    padding: 25px 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    overflow-x: auto;
 }
 
 /* Estilo da tabela */
@@ -160,36 +185,39 @@ footer {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    font-size: 1em;
 }
 
 .table th, .table td {
-    border: 1px solid #ddd;
-    padding: 10px;
+    border: 1px solid #e0e0e0;
+    padding: 12px 8px;
     text-align: left;
 }
 
 .table th {
     background-color: #0078d7;
-    color: white;
+    color: #fff;
+    font-weight: 600;
 }
 
 .table tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #f7fafd;
 }
 
 .table tr:hover {
-    background-color: #f1f1f1;
+    background-color: #eaf1fb;
 }
 
 /* Botões na tabela */
 .table .btn-primary {
     background-color: #0078d7;
-    color: white;
-    padding: 5px 10px;
+    color: #fff;
+    padding: 5px 12px;
     border-radius: 5px;
     text-decoration: none;
-    font-size: 14px;
-    transition: background-color 0.3s;
+    font-size: 0.95em;
+    transition: background 0.2s;
+    border: none;
 }
 
 .table .btn-primary:hover {
@@ -199,19 +227,52 @@ footer {
 /* Ações */
 .actions {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 22px;
 }
 
 .actions .btn-secondary {
     background-color: #ccc;
-    color: black;
-    padding: 10px 20px;
+    color: #222;
+    padding: 10px 22px;
     border-radius: 5px;
     text-decoration: none;
-    font-size: 16px;
-    transition: background-color 0.3s;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
 .actions .btn-secondary:hover {
     background-color: #aaa;
+}
+
+/* Responsividade */
+@media (max-width: 700px) {
+    .menu, .form-container, .list-container {
+        width: 98%;
+        padding: 10px 2vw;
+    }
+    .table th, .table td {
+        padding: 8px 4px;
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 500px) {
+    header h1 {
+        font-size: 1.3em;
+    }
+    .menu h3 {
+        font-size: 1.1em;
+    }
+    .form input, .form select {
+        font-size: 0.95em;
+    }
+    .btn-primary, .btn-secondary, .actions .btn-secondary {
+        font-size: 0.95em;
+        padding: 8px 10px;
+    }
+    .table {
+        font-size: 0.95em;
+    }
 }
