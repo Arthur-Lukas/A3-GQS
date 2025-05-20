@@ -4,7 +4,7 @@
 
 O **ProjetoLimpo** é um sistema web simples para gerenciamento de uma biblioteca pessoal. O sistema é uma refatoração do "ProjetoSujo" que é um CRUD feito em Java, criado no primeiro semestre de 2024.
 
-# Algumas outras características do projeto
+### Algumas outras características do projeto
 - Foi refatorado inteiramente em PHP para ser uma aplicação WEB. Mas também há HTML, CSS e JS.
 - Utiliza o paradigma de orientação á objetos (POO)
 - Padrão de arquitetura MVC (model-view-controler)
