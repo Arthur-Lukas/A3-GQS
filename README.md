@@ -46,13 +46,13 @@ O projeto foi criado como exercício acadêmico para aplicar conhecimentos bási
 2. **Crie o banco de dados** chamado db_biblioteca no MySQL. (caso já tenha feito, pule para a próxima etapa)
 Importe o arquivo db_biblioteca que está na pasta script.sql.
 
-3. **Configure a conexão JDBC**
+3. **Configure a conexão JDBC**:
 Baixe o driver mysql_conector e adicione ao classpath/libraries do projeto.
 
-4. **Inclua o conector no classpath**
+4. **Inclua o conector no classpath**:
 No arquivo de factory/Conexao.java, ajuste as variáveis de conexão (host, database, user, password) conforme seu ambiente.
 
-5. **Execute**
+5. **Execute**:
 Execute a classe Main.java para iniciar o sistema.
 
 ---
