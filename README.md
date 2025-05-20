@@ -8,6 +8,7 @@ O **ProjetoLimpo** é um sistema web simples para gerenciamento de uma bibliotec
 - Foi refatorado inteiramente em PHP para ser uma aplicação WEB. Mas também há HTML, CSS e JS.
 - Utiliza o paradigma de orientação á objetos (POO)
 - Padrão de arquitetura MVC (model-view-controler)
+- Tem uma interface web simples e responsiva
 
 O projeto foi desenvolvido com foco em boas práticas de programação, utilizando os princípios do "Clean code" para torna-lo mais legivel, modular e facilitar a manutenção e atualização.
 
