@@ -9,6 +9,7 @@ O **ProjetoLimpo** é um sistema web simples para gerenciamento de uma bibliotec
 - Utiliza o paradigma de orientação á objetos (POO)
 - Padrão de arquitetura MVC (model-view-controler)
 - Tem uma interface web simples e responsiva
+- Aplicação dos princípios SOLID, DRY, KISS e YAGNI.
 
 O projeto foi desenvolvido com foco em boas práticas de programação, utilizando os princípios do "Clean code" para torna-lo mais legivel, modular e facilitar a manutenção e atualização.
 
@@ -18,6 +19,48 @@ O projeto foi desenvolvido com foco em boas práticas de programação, utilizan
 
 - Cadastro, listagem, e exclusão de gêneros literários
 - Cadastro, listagem, edição e exclusão de livros físicos e e-books
+
+---
+
+## Estrutura do Projeto
+
+ProjetoLimpo/
+├── assets/
+│   ├── css/
+│   │   └── styles.css
+│   └── js/
+│       └── scripts.js
+├── script_sql/
+│   └── db_biblioteca.sql
+├── src/
+│   ├── config/
+│   │   └── Conexao.php
+│   ├── controllers/
+│   │   ├── GeneroController.php
+│   │   ├── LivroFisicoController.php
+│   │   └── EbookController.php
+│   └── models/
+│       ├── Genero.php
+│       ├── LivroFisico.php
+│       └── Ebook.php
+├── views/
+│   ├── genero/
+│   │   ├── cadastrar_genero.php
+│   │   ├── listar_generos.php
+│   │   └── excluir_genero.php
+│   │   
+│   ├── livro_fisico/
+│   │   ├── cadastrar_livro_fisico.php
+│   │   ├── listar_livros_fisicos.php
+│   │   ├── editar_livro_fisico.php
+│   │   └── excluir_livro_fisico.php
+│   └── ebook/
+│       ├── cadastrar_ebook.php
+│       ├── listar_ebooks.php
+│       ├── editar_ebook.php
+│       └── excluir_ebook.php
+├── index.html
+└── README.md
 
 ---
 
@@ -44,7 +87,7 @@ O projeto foi desenvolvido com foco em boas práticas de programação, utilizan
 4. **Crie o banco de dados**
    - Acesse o [phpMyAdmin](http://localhost/phpmyadmin)
    - Crie um banco de dados chamado `db_biblioteca` 
-   - Importe o script do banco de dados na pasta do repositório (script_sql)
+   - Importe o script do banco de dados que está na pasta (script_sql) do repositório 
 
 5. **Acesse o sistema**
    - No navegador, acesse:  
