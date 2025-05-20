@@ -2,9 +2,14 @@
 
 ## Sobre o Projeto
 
-O **ProjetoLimpo** é um sistema web simples para gerenciamento de uma biblioteca pessoal, desenvolvido em PHP seguindo os princípios de Clean Code. O sistema é uma refatoração do "ProjetoSujo" que é um CRUD feito em Java, criado no primeiro semestre de 2024.
+O **ProjetoLimpo** é um sistema web simples para gerenciamento de uma biblioteca pessoal. O sistema é uma refatoração do "ProjetoSujo" que é um CRUD feito em Java, criado no primeiro semestre de 2024.
 
-O projeto foi desenvolvido com foco em boas práticas de programação,utilizando separação de responsabilidades (MVC), modularidade e facilidade de manutenção.
+# Algumas outras características do projeto
+- Foi refatorado inteiramente em PHP para ser uma aplicação WEB. Mas também há HTML, CSS e JS.
+- Utiliza o paradigma de orientação á objetos (POO)
+- Padrão de arquitetura MVC (model-view-controler)
+
+O projeto foi desenvolvido com foco em boas práticas de programação, utilizando os princípios do "Clean code" para torna-lo mais legivel, modular e facilitar a manutenção e atualização.
 
 ---
 
