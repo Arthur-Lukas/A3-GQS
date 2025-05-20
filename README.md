@@ -22,48 +22,6 @@ O projeto foi desenvolvido com foco em boas práticas de programação, utilizan
 
 ---
 
-## Estrutura do Projeto
-
-ProjetoLimpo/
-├── assets/
-│   ├── css/
-│   │   └── styles.css
-│   └── js/
-│       └── scripts.js
-├── script_sql/
-│   └── db_biblioteca.sql
-├── src/
-│   ├── config/
-│   │   └── Conexao.php
-│   ├── controllers/
-│   │   ├── GeneroController.php
-│   │   ├── LivroFisicoController.php
-│   │   └── EbookController.php
-│   └── models/
-│       ├── Genero.php
-│       ├── LivroFisico.php
-│       └── Ebook.php
-├── views/
-│   ├── genero/
-│   │   ├── cadastrar_genero.php
-│   │   ├── listar_generos.php
-│   │   └── excluir_genero.php
-│   │   
-│   ├── livro_fisico/
-│   │   ├── cadastrar_livro_fisico.php
-│   │   ├── listar_livros_fisicos.php
-│   │   ├── editar_livro_fisico.php
-│   │   └── excluir_livro_fisico.php
-│   └── ebook/
-│       ├── cadastrar_ebook.php
-│       ├── listar_ebooks.php
-│       ├── editar_ebook.php
-│       └── excluir_ebook.php
-├── index.html
-└── README.md
-
----
-
 ## Pré-requisitos
 
 - [XAMPP](https://www.apachefriends.org/pt_br/index.html) ou outro servidor local com suporte a PHP e MySQL
