@@ -14,7 +14,12 @@ O **ProjetoLimpo** é um sistema web simples para gerenciamento de uma bibliotec
 O projeto foi desenvolvido com foco em boas práticas de programação, utilizando os princípios do "Clean code" para torna-lo mais legivel, modular e facilitar a manutenção e atualização.
 
 ---
+
+## Estrutura do projeto
+
 <img src="https://github.com/user-attachments/assets/2c2d5b5c-d290-4947-806d-d56c60889750" alt="descrição" width="300"/>
+
+---
 
 ## Funcionalidades
 
