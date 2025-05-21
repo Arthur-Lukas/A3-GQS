@@ -44,16 +44,18 @@ O projeto foi criado como exercício acadêmico para aplicar conhecimentos bási
    ```bash
    git clone  https://github.com/Arthur-Lukas/A3-GQS.git 
 
-2. **Crie o banco de dados** chamado db_biblioteca no MySQL. (caso já tenha feito, pule para a próxima etapa)
-Importe o arquivo db_biblioteca que está na pasta script.sql.
+2. **Abra o XAMPP**: inicialize o apache e o MySQL, e clique no admin do MySQL
 
-3. **Configure a conexão JDBC**:
+3. **Crie o banco de dados**: crie um banco de dados e coloque o nome de "db_biblioteca" na página do MySQL. (caso já tenha feito, pule para a próxima etapa). Depois
+importe o arquivo db_biblioteca que está na pasta script.sql.
+
+4. **Configure a conexão JDBC**:
 Baixe o driver mysql_conector e adicione ao classpath/libraries do projeto.
 
-4. **Inclua o conector no classpath**:
+5. **Inclua o conector no classpath**:
 No arquivo de factory/Conexao.java, ajuste as variáveis de conexão (host, database, user, password) conforme seu ambiente.
 
-5. **Execute**:
+6. **Execute**:
 Execute a classe Main.java para iniciar o sistema.
 
 ---
