@@ -8,6 +8,7 @@
 - Joyce Mendonça Paixão - RA 323212772
 - Bruno Almeida Vilela - RA 323124929
 - Ronildo Santos da Silva – RA 823226546
+- Renato Pereira _ RA 322441099
 
 # Biblioteca Java - CRUD com POO e MySQL
 
