@@ -44,7 +44,7 @@ O projeto foi criado como exercício acadêmico para aplicar conhecimentos bási
    ```bash
    git clone  https://github.com/Arthur-Lukas/A3-GQS.git 
 
-2. **Abra o XAMPP**: inicialize o apache e o MySQL, e clique no admin do MySQL
+2. **Abra o XAMPP**: inicialize o apache e o MySQL, e clique no admin do MySQL. OBS: toda vez que for executar o projeto tem que deixar ligado o apache e o MySQL.
 
 3. **Crie o banco de dados**: crie um banco de dados e coloque o nome de "db_biblioteca" na página do MySQL. (caso já tenha feito, pule para a próxima etapa). Depois
 importe o arquivo db_biblioteca que está na pasta script.sql.
