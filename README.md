@@ -55,7 +55,8 @@ O projeto foi desenvolvido com foco em boas práticas de programação, utilizan
 
 5. **Acesse o sistema**
    - No navegador, acesse:  
-     [http://localhost/ProjetoLimpo/index.html](http://localhost/ProjetoLimpo/index.html)
+     [http://localhost/A3-GQS/index.html](http://localhost/A3-GQS/index.html)
+     Se o projeto estiver em uma subpasta diferente, basta ajustar o caminho após o localhost/.
 
 ---
 
