@@ -24,6 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mensagem = "<p class='error'>O campo Autor deve conter apenas letras, espaços, apóstrofos, hífens e pontos!</p>";
     } elseif (empty($titulo) || empty($autor) || empty($lancamento) || empty($preco) || empty($id_genero)) {
         $mensagem = "<p class='error'>Todos os campos são obrigatórios!</p>";
+    } elseif ($lancamento <= 0 || $preco <= 0) {
+        $mensagem = "<p class='error'>Ano de lançamento e preço devem ser positivos!</p>";
     } else {
         try {
             LivroFisicoController::cadastrarLivroFisico($titulo, $autor, $lancamento, $preco, $id_genero);

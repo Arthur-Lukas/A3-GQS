@@ -32,13 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_genero = $_POST['id_genero'] ?? '';
 
     if ($id && $titulo && $autor && $lancamento && $preco && $id_genero) {
-        try {
-            LivroFisicoController::editarLivroFisico($id, $titulo, $autor, $lancamento, $preco, $id_genero);
-            $mensagem = "<p class='success'>Livro atualizado com sucesso!</p>";
-            // Atualizar a lista de livros após edição
-            $livros = LivroFisicoController::listarLivrosFisicos();
-        } catch (Exception $e) {
-            $mensagem = "<p class='error'>Erro ao atualizar o livro: " . htmlspecialchars($e->getMessage()) . "</p>";
+        if ($lancamento <= 0 || $preco <= 0) {
+            $mensagem = "<p class='error'>Ano de lançamento e preço devem ser positivos!</p>";
+        } else {
+            try {
+                LivroFisicoController::editarLivroFisico($id, $titulo, $autor, $lancamento, $preco, $id_genero);
+                $mensagem = "<p class='success'>Livro atualizado com sucesso!</p>";
+                // Atualizar a lista de livros após edição
+                $livros = LivroFisicoController::listarLivrosFisicos();
+            } catch (Exception $e) {
+                $mensagem = "<p class='error'>Erro ao atualizar o livro: " . htmlspecialchars($e->getMessage()) . "</p>";
+            }
         }
     } else {
         $mensagem = "<p class='error'>Todos os campos são obrigatórios.</p>";

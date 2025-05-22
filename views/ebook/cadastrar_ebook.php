@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mensagem = "<p class='error'>O campo Autor deve conter apenas letras, espaços, apóstrofos, hífens e pontos!</p>";
     } elseif (empty($titulo) || empty($autor) || empty($lancamento) || empty($paginas) || empty($id_genero)) {
         $mensagem = "<p class='error'>Todos os campos são obrigatórios!</p>";
+    } elseif ($lancamento <= 0 || $paginas <= 0) {
+        $mensagem = "<p class='error'>Os números devem ser positivos!</p>";
     } else {
         try {
             EbookController::cadastrarEbook($titulo, $autor, $lancamento, $paginas, $id_genero);
@@ -58,10 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="autor" id="autor" required>
 
             <label for="lancamento">Ano de Lançamento:</label>
-            <input type="number" name="lancamento" id="lancamento" required>
+            <input type="number" name="lancamento" id="lancamento" required min="1">
 
             <label for="paginas">Número de Páginas:</label>
-            <input type="number" name="paginas" id="paginas" required>
+            <input type="number" name="paginas" id="paginas" required min="1">
 
             <label for="id_genero">Gênero:</label>
             <select name="id_genero" id="id_genero" required>

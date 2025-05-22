@@ -32,13 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_genero = $_POST['id_genero'] ?? '';
 
     if ($id && $titulo && $autor && $lancamento && $paginas && $id_genero) {
-        try {
-            EbookController::editarEbook($id, $titulo, $autor, $lancamento, $paginas, $id_genero);
-            $mensagem = "<p class='success'>E-book atualizado com sucesso!</p>";
-            // Atualizar a lista de e-books após edição
-            $ebooks = EbookController::listarEbooks();
-        } catch (Exception $e) {
-            $mensagem = "<p class='error'>Erro ao atualizar o e-book: " . htmlspecialchars($e->getMessage()) . "</p>";
+        if ($lancamento <= 0 || $paginas <= 0) {
+            $mensagem = "<p class='error'>Os números devem ser positivos!</p>";
+        } else {
+            try {
+                EbookController::editarEbook($id, $titulo, $autor, $lancamento, $paginas, $id_genero);
+                $mensagem = "<p class='success'>E-book atualizado com sucesso!</p>";
+                // Atualizar a lista de e-books após edição
+                $ebooks = EbookController::listarEbooks();
+            } catch (Exception $e) {
+                $mensagem = "<p class='error'>Erro ao atualizar o e-book: " . htmlspecialchars($e->getMessage()) . "</p>";
+            }
         }
     } else {
         $mensagem = "<p class='error'>Todos os campos são obrigatórios.</p>";

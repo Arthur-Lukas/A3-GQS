@@ -1,18 +1,13 @@
 <?php
-class LivroFisico {
-    public $id;
-    public $titulo;
-    public $autor;
-    public $lancamento;
-    public $preco;
-    public $id_genero;
+include_once 'Livro.php';
+class LivroFisico extends Livro
+{
+    protected float $preco;
 
-    public function __construct($titulo, $autor, $lancamento, $preco, $id_genero) {
-        $this->titulo = $titulo;
-        $this->autor = $autor;
-        $this->lancamento = $lancamento;
+    public function __construct(int $id, string $titulo, string $autor, string $lancamento, int $id_genero, float $preco)
+    {
+        parent::__construct($id, $titulo, $autor, $lancamento, $id_genero);
         $this->preco = $preco;
-        $this->id_genero = $id_genero;
     }
 }
 ?>

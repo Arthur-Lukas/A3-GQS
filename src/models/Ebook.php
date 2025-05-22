@@ -1,18 +1,13 @@
 <?php
-class Ebook {
-    public $id;
-    public $titulo;
-    public $autor;
-    public $lancamento;
-    public $paginas;
-    public $id_genero;
+include_once 'Livro.php';
+class Ebook extends Livro
+{
+    protected int $paginas;
 
-    public function __construct($titulo, $autor, $lancamento, $paginas, $id_genero) {
-        $this->titulo = $titulo;
-        $this->autor = $autor;
-        $this->lancamento = $lancamento;
+    public function __construct(int $id, string $titulo, string $autor, string $lancamento, int $id_genero, int $paginas)
+    {
+        parent::__construct($id, $titulo, $autor, $lancamento, $id_genero);
         $this->paginas = $paginas;
-        $this->id_genero = $id_genero;
     }
 }
 ?>

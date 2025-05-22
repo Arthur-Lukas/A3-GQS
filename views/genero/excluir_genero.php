@@ -16,20 +16,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'] ?? null;
 
     if ($id) {
-        try {
-            // Verificar se há livros associados ao gênero
-            $livrosRelacionados = LivroFisicoController::verificarLivrosPorGenero($id);
-
-            if ($livrosRelacionados > 0) {
-                $mensagem = "<p class='error'>Não é possível excluir. Há livros associados a este gênero!</p>";
-            } else {
-                GeneroController::excluirGenero($id);
-                $mensagem = "<p class='success'>Gênero excluído com sucesso!</p>";
-                // Atualizar a lista de gêneros após exclusão
-                $generos = GeneroController::listarGeneros();
+        // Verifica se o ID existe na lista de gêneros
+        $generoExiste = false;
+        foreach ($generos as $genero) {
+            if ($genero['id'] == $id) {
+                $generoExiste = true;
+                break;
             }
-        } catch (Exception $e) {
-            $mensagem = "<p class='error'>Erro ao excluir gênero: " . htmlspecialchars($e->getMessage()) . "</p>";
+        }
+
+        if (!$generoExiste) {
+            $mensagem = "<p class='error'>Gênero não encontrado, digite uma opção viável.</p>";
+        } else {
+            try {
+                // Verificar se há livros associados ao gênero
+                $livrosRelacionados = LivroFisicoController::verificarLivrosPorGenero($id);
+
+                if ($livrosRelacionados > 0) {
+                    $mensagem = "<p class='error'>Não é possível excluir. Há livros associados a este gênero!</p>";
+                } else {
+                    GeneroController::excluirGenero($id);
+                    $mensagem = "<p class='success'>Gênero excluído com sucesso!</p>";
+                    // Atualizar a lista de gêneros após exclusão
+                    $generos = GeneroController::listarGeneros();
+                }
+            } catch (Exception $e) {
+                $mensagem = "<p class='error'>Erro ao excluir gênero: " . htmlspecialchars($e->getMessage()) . "</p>";
+            }
         }
     } else {
         $mensagem = "<p class='error'>ID inválido.</p>";
@@ -84,7 +97,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </table>
         <?php endif; ?>
     </main>
-
 
 </body>
 </html>
