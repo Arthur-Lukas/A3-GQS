@@ -31,7 +31,6 @@ O projeto foi criado como exercício acadêmico para aplicar conhecimentos bási
 ## Pré-requisitos
 
 - [Java JDK 8+](https://www.oracle.com/java/technologies/downloads/)
-- [MySQL Server](https://dev.mysql.com/downloads/mysql/)
 - [Eclipse](https://www.eclipse.org/) ou outra IDE Java
 - [XAMPP](https://www.apachefriends.org/pt_br/index.html) ou outro servidor local com suporte a PHP e MySQL
 - [MySQL-conector](https://dev.mysql.com/downloads/connector/j/)
