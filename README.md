@@ -57,7 +57,7 @@ O projeto foi desenvolvido com foco em boas práticas de programação, utilizan
    
 2. **Coloque a pasta do projeto no diretório do seu servidor local**
    - Exemplo para XAMPP:  
-   - Copie a pasta `ProjetoLimpo` para `C:\xampp\htdocs\`
+   - Copie a pasta `A3-GQS` para `C:\xampp\htdocs\`
 
 3. **Inicie o servidor Apache e MySQL pelo XAMPP**
 
