@@ -1,4 +1,7 @@
 <?php
+
+namespace App\models;
+
 class Livro
 {
     protected int $id;
@@ -14,6 +17,31 @@ class Livro
         $this->autor = $autor;
         $this->lancamento = $lancamento;
         $this->id_genero = $id_genero;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getTitulo(): string
+    {
+        return $this->titulo;
+    }
+
+    public function getAutor(): string
+    {
+        return $this->autor;
+    }
+
+    public function getLancamento(): string
+    {
+        return $this->lancamento;
+    }
+
+    public function getIdGenero(): int
+    {
+        return $this->id_genero;
     }
 }
 ?>
