@@ -1,11 +1,27 @@
 <?php
-include_once '../../src/config/Conexao.php';
-include_once '../../src/models/Genero.php';
+namespace App\controllers;
+
+use App\config\Conexao;
+use App\models\Genero;
+use PDO;
+use PDOException;
 
 class GeneroController {
     public static function cadastrarGenero($nome) {
         try {
             $conexao = Conexao::conectar();
+
+            // Verifica se já existe um gênero com o mesmo nome
+            $sqlVerifica = "SELECT COUNT(*) FROM genero WHERE nome = :nome";
+            $stmtVerifica = $conexao->prepare($sqlVerifica);
+            $stmtVerifica->bindParam(':nome', $nome);
+            $stmtVerifica->execute();
+            $existe = $stmtVerifica->fetchColumn();
+
+            if ($existe > 0) {
+                return ["error" => "Informe outro gênero, este já está cadastrado!"];
+            }
+
             $sql = "INSERT INTO genero (nome) VALUES (:nome)";
             $stmt = $conexao->prepare($sql);
             $stmt->bindParam(':nome', $nome);

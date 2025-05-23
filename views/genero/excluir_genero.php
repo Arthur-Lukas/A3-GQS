@@ -1,7 +1,8 @@
 <?php
-include_once '../../src/config/Conexao.php';
-include_once '../../src/controllers/GeneroController.php';
-include_once '../../src/controllers/LivroFisicoController.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
+
+use App\controllers\GeneroController;
+use App\controllers\LivroFisicoController;
 
 $mensagem = '';
 

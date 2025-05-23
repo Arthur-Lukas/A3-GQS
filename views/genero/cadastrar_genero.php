@@ -1,5 +1,7 @@
 <?php
-include_once '../../src/controllers/GeneroController.php';
+
+require_once '../../vendor/autoload.php';
+use App\controllers\GeneroController;   
 
 $mensagem = '';
 

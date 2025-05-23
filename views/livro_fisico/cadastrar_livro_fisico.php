@@ -1,8 +1,9 @@
 <!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\cadastrar_livro_fisico.php -->
 <?php
-include_once '../../src/controllers/LivroFisicoController.php';
-include_once '../../src/controllers/GeneroController.php';
-
+require_once '../../vendor/autoload.php';
+use App\controllers\LivroFisicoController;
+use App\controllers\GeneroController;
+use App\controllers\UsuarioController;
 $mensagem = '';
 
 try {

@@ -1,5 +1,6 @@
 <?php
-include_once '../../src/controllers/LivroFisicoController.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
+use App\controllers\LivroFisicoController;
 
 try {
     $livros = LivroFisicoController::listarLivrosFisicos();

@@ -1,6 +1,7 @@
 <?php
-include_once '../../src/controllers/LivroFisicoController.php';
-include_once '../../src/controllers/GeneroController.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
+use App\controllers\GeneroController;
+use App\controllers\LivroFisicoController;
 
 $mensagem = '';
 $livros = [];

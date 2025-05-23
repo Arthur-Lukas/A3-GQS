@@ -1,12 +1,19 @@
 <?php
-include_once '../../src/config/Conexao.php';
-include_once '../../src/models/LivroFisico.php';
+// filepath: src/controllers/LivroFisicoController.php
+namespace App\controllers;
 
-class LivroFisicoController {
-    public static function cadastrarLivroFisico($titulo, $autor, $lancamento, $preco, $id_genero) {
+use App\config\Conexao;
+use App\models\LivroFisico;
+use PDO;
+use PDOException;
+
+class LivroFisicoController
+{
+    public static function cadastrarLivroFisico($titulo, $autor, $lancamento, $preco, $id_genero)
+    {
         try {
             $conexao = Conexao::conectar();
-            $sql = "INSERT INTO livrosfisicos (titulo, autor, lancamento, preco, id_genero) VALUES (:titulo, :autor, :lancamento, :preco, :id_genero)";
+            $sql = "INSERT INTO livros_fisicos (titulo, autor, lancamento, preco, id_genero) VALUES (:titulo, :autor, :lancamento, :preco, :id_genero)";
             $stmt = $conexao->prepare($sql);
             $stmt->bindParam(':titulo', $titulo);
             $stmt->bindParam(':autor', $autor);

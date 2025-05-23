@@ -1,5 +1,6 @@
 <?php
-include_once '../../src/controllers/GeneroController.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
+use App\controllers\GeneroController;
 
 try {
     $generos = GeneroController::listarGeneros();
