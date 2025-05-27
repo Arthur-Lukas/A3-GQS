@@ -5,15 +5,15 @@ use App\controllers\LivroFisicoController;
 
 $mensagem = '';
 $livros = [];
+$generos = [];
 
 try {
-    // Buscar todos os livros físicos para exibição
+    $generos = GeneroController::listarGeneros();
     $livros = LivroFisicoController::listarLivrosFisicos();
 } catch (Exception $e) {
-    $mensagem = "<p class='error'>Erro ao carregar livros: " . htmlspecialchars($e->getMessage()) . "</p>";
+    $mensagem = "<p class='error'>Erro ao carregar dados: " . htmlspecialchars($e->getMessage()) . "</p>";
 }
 
-// Buscar livro pelo ID passado via GET
 $livro = null;
 if (isset($_GET['id'])) {
     try {
@@ -23,27 +23,28 @@ if (isset($_GET['id'])) {
     }
 }
 
-// Processar atualização do livro
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'] ?? null;
-    $titulo = $_POST['titulo'] ?? '';
-    $autor = $_POST['autor'] ?? '';
-    $lancamento = $_POST['lancamento'] ?? '';
-    $preco = $_POST['preco'] ?? '';
+    $titulo = trim($_POST['titulo'] ?? '');
+    $autor = trim($_POST['autor'] ?? '');
+    $lancamento = trim($_POST['lancamento'] ?? '');
+    $preco = trim($_POST['preco'] ?? '');
     $id_genero = $_POST['id_genero'] ?? '';
 
-    if ($id && $titulo && $autor && $lancamento && $preco && $id_genero) {
-        if ($lancamento <= 0 || $preco <= 0) {
-            $mensagem = "<p class='error'>Ano de lançamento e preço devem ser positivos!</p>";
-        } else {
-            try {
-                LivroFisicoController::editarLivroFisico($id, $titulo, $autor, $lancamento, $preco, $id_genero);
-                $mensagem = "<p class='success'>Livro atualizado com sucesso!</p>";
-                // Atualizar a lista de livros após edição
-                $livros = LivroFisicoController::listarLivrosFisicos();
-            } catch (Exception $e) {
-                $mensagem = "<p class='error'>Erro ao atualizar o livro: " . htmlspecialchars($e->getMessage()) . "</p>";
-            }
+    // Validação dos campos numéricos
+    if (
+        !ctype_digit($lancamento) || (int)$lancamento <= 0 ||
+        !is_numeric($preco) || $preco <= 0
+    ) {
+        $mensagem = "<p class='error'>Ano de lançamento deve ser inteiro positivo e preço deve ser um número positivo!</p>";
+    } elseif ($id && $titulo && $autor && $lancamento && $preco && $id_genero) {
+        try {
+            LivroFisicoController::editarLivroFisico($id, $titulo, $autor, $lancamento, $preco, $id_genero);
+            $mensagem = "<p class='success'>Livro atualizado com sucesso!</p>";
+            $livros = LivroFisicoController::listarLivrosFisicos();
+            $livro = LivroFisicoController::buscarPorId($id);
+        } catch (Exception $e) {
+            $mensagem = "<p class='error'>Erro ao atualizar o livro: " . htmlspecialchars($e->getMessage()) . "</p>";
         }
     } else {
         $mensagem = "<p class='error'>Todos os campos são obrigatórios.</p>";
@@ -78,13 +79,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" name="autor" id="autor" value="<?= htmlspecialchars($livro['autor']) ?>" required>
 
                 <label for="lancamento">Ano de Lançamento:</label>
-                <input type="number" name="lancamento" id="lancamento" value="<?= htmlspecialchars($livro['lancamento']) ?>" required>
+                <input type="text" name="lancamento" id="lancamento" value="<?= htmlspecialchars($livro['lancamento']) ?>" required>
 
                 <label for="preco">Preço:</label>
-                <input type="number" name="preco" id="preco" step="0.01" value="<?= htmlspecialchars($livro['preco']) ?>" required>
+                <input type="text" name="preco" id="preco" value="<?= htmlspecialchars($livro['preco']) ?>" required>
 
                 <label for="id_genero">Gênero:</label>
-                <input type="number" name="id_genero" id="id_genero" value="<?= htmlspecialchars($livro['id_genero']) ?>" required>
+                <select name="id_genero" id="id_genero" required>
+                    <option value="">Selecione o gênero</option>
+                    <?php foreach ($generos as $genero): ?>
+                        <option value="<?= htmlspecialchars($genero['id']) ?>"
+                            <?= ($livro['id_genero'] == $genero['id']) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($genero['nome']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
 
                 <div class="form-actions">
                     <button type="submit" class="btn-primary">Atualizar Livro</button>
@@ -92,7 +101,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </form>
         <?php endif; ?>
-        <br>    
+    </main>
+
+    <div class="list-container">
         <h3>Lista de Livros Físicos Cadastrados</h3>
         <?php if (empty($livros)): ?>
             <p class="info">Nenhum livro físico cadastrado.</p>
@@ -105,19 +116,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <th>Autor</th>
                         <th>Ano de Lançamento</th>
                         <th>Preço</th>
+                        <th>Gênero</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($livros as $livro): ?>
+                    <?php foreach ($livros as $livroItem): ?>
                         <tr>
-                            <td><?= htmlspecialchars($livro['id']) ?></td>
-                            <td><?= htmlspecialchars($livro['titulo']) ?></td>
-                            <td><?= htmlspecialchars($livro['autor']) ?></td>
-                            <td><?= htmlspecialchars($livro['lancamento']) ?></td>
-                            <td><?= htmlspecialchars($livro['preco']) ?></td>
+                            <td><?= htmlspecialchars($livroItem['id']) ?></td>
+                            <td><?= htmlspecialchars($livroItem['titulo']) ?></td>
+                            <td><?= htmlspecialchars($livroItem['autor']) ?></td>
+                            <td><?= htmlspecialchars($livroItem['lancamento']) ?></td>
+                            <td><?= htmlspecialchars($livroItem['preco']) ?></td>
+                            <td><?= htmlspecialchars($livroItem['nome_genero'] ?? '') ?></td>
                             <td>
-                                <a href="editar_livro_fisico.php?id=<?= htmlspecialchars($livro['id']) ?>" class="btn-primary">Editar</a>
+                                <a href="editar_livro_fisico.php?id=<?= htmlspecialchars($livroItem['id']) ?>" class="btn-primary">Editar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -127,6 +140,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="actions">
             <a href="../../index.html" class="btn-secondary">Voltar ao Menu</a>
         </div>
-    </main>
+    </div>
 </body>
 </html>

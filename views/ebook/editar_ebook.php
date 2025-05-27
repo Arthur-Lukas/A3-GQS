@@ -1,19 +1,20 @@
 <?php
 require_once __DIR__ . '/../../vendor/autoload.php';
+
 use App\controllers\GeneroController;
 use App\controllers\EbookController;
 
 $mensagem = '';
 $ebooks = [];
+$generos = [];
 
 try {
-    // Buscar todos os e-books para exibição
+    $generos = GeneroController::listarGeneros();
     $ebooks = EbookController::listarEbooks();
 } catch (Exception $e) {
-    $mensagem = "<p class='error'>Erro ao carregar e-books: " . htmlspecialchars($e->getMessage()) . "</p>";
+    $mensagem = "<p class='error'>Erro ao carregar dados: " . htmlspecialchars($e->getMessage()) . "</p>";
 }
 
-// Buscar e-book pelo ID passado via GET
 $ebook = null;
 if (isset($_GET['id'])) {
     try {
@@ -23,27 +24,28 @@ if (isset($_GET['id'])) {
     }
 }
 
-// Processar atualização do e-book
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'] ?? null;
-    $titulo = $_POST['titulo'] ?? '';
-    $autor = $_POST['autor'] ?? '';
-    $lancamento = $_POST['lancamento'] ?? '';
-    $paginas = $_POST['paginas'] ?? '';
+    $titulo = trim($_POST['titulo'] ?? '');
+    $autor = trim($_POST['autor'] ?? '');
+    $lancamento = trim($_POST['lancamento'] ?? '');
+    $paginas = trim($_POST['paginas'] ?? '');
     $id_genero = $_POST['id_genero'] ?? '';
 
-    if ($id && $titulo && $autor && $lancamento && $paginas && $id_genero) {
-        if ($lancamento <= 0 || $paginas <= 0) {
-            $mensagem = "<p class='error'>Os números devem ser positivos!</p>";
-        } else {
-            try {
-                EbookController::editarEbook($id, $titulo, $autor, $lancamento, $paginas, $id_genero);
-                $mensagem = "<p class='success'>E-book atualizado com sucesso!</p>";
-                // Atualizar a lista de e-books após edição
-                $ebooks = EbookController::listarEbooks();
-            } catch (Exception $e) {
-                $mensagem = "<p class='error'>Erro ao atualizar o e-book: " . htmlspecialchars($e->getMessage()) . "</p>";
-            }
+    // Validação dos campos numéricos
+    if (
+        !ctype_digit($lancamento) || (int)$lancamento <= 0 ||
+        !ctype_digit($paginas) || (int)$paginas <= 0
+    ) {
+        $mensagem = "<p class='error'>Ano de lançamento e número de páginas devem ser números inteiros positivos!</p>";
+    } elseif ($id && $titulo && $autor && $lancamento && $paginas && $id_genero) {
+        try {
+            EbookController::editarEbook($id, $titulo, $autor, $lancamento, $paginas, $id_genero);
+            $mensagem = "<p class='success'>E-book atualizado com sucesso!</p>";
+            $ebooks = EbookController::listarEbooks();
+            $ebook = EbookController::buscarPorId($id);
+        } catch (Exception $e) {
+            $mensagem = "<p class='error'>Erro ao atualizar o e-book: " . htmlspecialchars($e->getMessage()) . "</p>";
         }
     } else {
         $mensagem = "<p class='error'>Todos os campos são obrigatórios.</p>";
@@ -78,13 +80,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" name="autor" id="autor" value="<?= htmlspecialchars($ebook['autor']) ?>" required>
 
                 <label for="lancamento">Ano de Lançamento:</label>
-                <input type="number" name="lancamento" id="lancamento" value="<?= htmlspecialchars($ebook['lancamento']) ?>" required>
+                <input type="text" name="lancamento" id="lancamento" value="<?= htmlspecialchars($ebook['lancamento']) ?>" required>
 
                 <label for="paginas">Número de Páginas:</label>
-                <input type="number" name="paginas" id="paginas" value="<?= htmlspecialchars($ebook['paginas']) ?>" required>
+                <input type="text" name="paginas" id="paginas" value="<?= htmlspecialchars($ebook['paginas']) ?>" required>
 
-                <label for="id_genero">ID do Gênero:</label>
-                <input type="number" name="id_genero" id="id_genero" value="<?= htmlspecialchars($ebook['id_genero']) ?>" required>
+                <label for="id_genero">Gênero:</label>
+                <select name="id_genero" id="id_genero" required>
+                    <option value="">Selecione o gênero</option>
+                    <?php foreach ($generos as $genero): ?>
+                        <option value="<?= htmlspecialchars($genero['id']) ?>"
+                            <?= ($ebook['id_genero'] == $genero['id']) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($genero['nome']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
 
                 <div class="form-actions">
                     <button type="submit" class="btn-primary">Atualizar E-book</button>
@@ -92,7 +102,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </form>
         <?php endif; ?>
-            <br>
+    </main>
+
+    <div class="list-container">
         <h3>Lista de E-books Cadastrados</h3>
         <?php if (empty($ebooks)): ?>
             <p class="info">Nenhum e-book cadastrado.</p>
@@ -105,29 +117,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <th>Autor</th>
                         <th>Ano de Lançamento</th>
                         <th>Número de Páginas</th>
+                        <th>Gênero</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($ebooks as $ebook): ?>
+                    <?php foreach ($ebooks as $ebookItem): ?>
                         <tr>
-                            <td><?= htmlspecialchars($ebook['id']) ?></td>
-                            <td><?= htmlspecialchars($ebook['titulo']) ?></td>
-                            <td><?= htmlspecialchars($ebook['autor']) ?></td>
-                            <td><?= htmlspecialchars($ebook['lancamento']) ?></td>
-                            <td><?= htmlspecialchars($ebook['paginas']) ?></td>
+                            <td><?= htmlspecialchars($ebookItem['id']) ?></td>
+                            <td><?= htmlspecialchars($ebookItem['titulo']) ?></td>
+                            <td><?= htmlspecialchars($ebookItem['autor']) ?></td>
+                            <td><?= htmlspecialchars($ebookItem['lancamento']) ?></td>
+                            <td><?= htmlspecialchars($ebookItem['paginas']) ?></td>
+                            <td><?= htmlspecialchars($ebookItem['nome_genero'] ?? '') ?></td>
                             <td>
-                                <a href="editar_ebook.php?id=<?= htmlspecialchars($ebook['id']) ?>" class="btn-primary">Editar</a>
+                                <a href="editar_ebook.php?id=<?= htmlspecialchars($ebookItem['id']) ?>" class="btn-primary">Editar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         <?php endif; ?>
-
         <div class="actions">
             <a href="../../index.html" class="btn-secondary">Voltar ao Menu</a>
         </div>
-    </main>
+    </div>
 </body>
 </html>

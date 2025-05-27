@@ -15,8 +15,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mensagem = "<p class='error'>O nome do gênero é obrigatório!</p>";
     } else {
         try {
-            GeneroController::cadastrarGenero($nome);
-            $mensagem = "<p class='success'>Gênero cadastrado com sucesso!</p>";
+            // Verifica se já existe um gênero com esse nome
+            $generosExistentes = GeneroController::listarGeneros();
+            $jaExiste = false;
+            foreach ($generosExistentes as $genero) {
+                if (mb_strtolower(trim($genero['nome'])) === mb_strtolower($nome)) {
+                    $jaExiste = true;
+                    break;
+                }
+            }
+            if ($jaExiste) {
+                $mensagem = "<p class='error'>Este gênero já está cadastrado!</p>";
+            } else {
+                GeneroController::cadastrarGenero($nome);
+                $mensagem = "<p class='success'>Gênero cadastrado com sucesso!</p>";
+            }
         } catch (Exception $e) {
             $mensagem = "<p class='error'>Erro ao cadastrar gênero: " . htmlspecialchars($e->getMessage()) . "</p>";
         }
