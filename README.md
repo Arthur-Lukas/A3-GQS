@@ -33,7 +33,6 @@ O projeto foi criado como exercício acadêmico para aplicar conhecimentos bási
 - [Java JDK 8+](https://www.oracle.com/java/technologies/downloads/)
 - [Eclipse](https://www.eclipse.org/) ou outra IDE Java
 - [XAMPP](https://www.apachefriends.org/pt_br/index.html) ou outro servidor local com suporte a PHP e MySQL
-- [MySQL-conector](https://dev.mysql.com/downloads/connector/j/)
 
 ---
 
@@ -49,13 +48,13 @@ O projeto foi criado como exercício acadêmico para aplicar conhecimentos bási
 importe o arquivo db_biblioteca que está na pasta script.sql.
 
 4. **Configure a conexão JDBC**:
-Baixe o driver mysql_conector e adicione ao classpath/libraries do projeto.
+Pegue o driver mysql_conector que está na pasta 'resourses' e adicione ao classpath/libraries do projeto.
 
 5. **Inclua o conector no classpath**:
-No arquivo de factory/Conexao.java, ajuste as variáveis de conexão (host, database, user, password) conforme seu ambiente.
+No arquivo de factory/Conexao.java, ajuste as variáveis de conexão (host, database, user, password) conforme seu ambiente (normalmente não precisa mexer nisso).
 
 6. **Execute**:
-Execute a classe Main.java para iniciar o sistema.
+Execute a classe Main.java para iniciar o sistema (normalmente é só apertar F5).
 
 ---
 
