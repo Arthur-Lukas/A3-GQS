@@ -77,8 +77,10 @@ O projeto foi desenvolvido com foco em boas práticas de programação, utilizan
 
 É necessários instalar o PHPUNIT para conseguir realizar os testes. E foi feito o "gitgnore" da pasta "vendor" que não está no repositório deste projeto, sendo necessário a instalação do mesmo. A instalação do vendor pode ser feita no terminal mesmo, basta dar o comando "composer install" na raiz do projeto.
 
-### Comandos para realizar os testes pelo terminal
+### Comando para rodar todos os testes pelo terminal
+  - vendor/bin/phpunit tests/
 
+### Comandos para rodar os testes separadamente
   - vendor/bin/phpunit tests/TestModels/EbookTest.php
   - vendor/bin/phpunit tests/TestModels/LivroFisicoTest.php
   - vendor/bin/phpunit tests/TestModels/GeneroTest.php
