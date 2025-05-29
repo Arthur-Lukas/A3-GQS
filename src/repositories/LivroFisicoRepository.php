@@ -10,9 +10,9 @@ class LivroFisicoRepository
     public function cadastrar($titulo, $autor, $lancamento, $preco, $id_genero)
     {
         try {
-            // Aceita apenas números (inteiros ou decimais, positivos ou negativos), não aceita strings não numéricas
+            // Aceita apenas números (inteiros ou decimais, positivos ou negativos), não aceita strings 
             if (!is_numeric($lancamento)) {
-                return ["error" => "Ano de lançamento deve ser um número válido."];
+                return ["error" => "Insira apenas números!"];
             }
 
             $conexao = Conexao::conectar();
@@ -51,9 +51,9 @@ class LivroFisicoRepository
     public function editar($id, $titulo, $autor, $lancamento, $preco, $id_genero)
     {
         try {
-            // Aceita apenas números (inteiros ou decimais, positivos ou negativos), não aceita strings não numéricas
+            // Aceita apenas números (inteiros ou decimais, positivos ou negativos), não aceita strings
             if (!is_numeric($lancamento)) {
-                return ["error" => "Ano de lançamento deve ser um número válido."];
+                return ["error" => "Insira apenas números!"];
             }
 
             $conexao = Conexao::conectar();
