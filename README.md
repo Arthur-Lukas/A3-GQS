@@ -79,9 +79,9 @@ O projeto foi desenvolvido com foco em boas práticas de programação, utilizan
 
 ### Comandos para realizar os testes pelo terminal
 
-  - vendor\bin\phpunit tests\EbookTest.php
-  - vendor\bin\phpunit tests\LivroFisicoTest.php
-  - vendor\bin\phpunit tests\GeneroTest.php
+  - vendor/bin/phpunit tests/TestModels/EbookTest.php
+  - vendor/bin/phpunit tests/TestModels/LivroFisicoTest.php
+  - vendor/bin/phpunit tests/TestModels/GeneroTest.php
   - vendor\bin\phpunit tests\TestControllers\GeneroControllerTest.php
   - vendor\bin\phpunit tests\TestControllers\EbookControllerTest.php
   - vendor\bin\phpunit tests\TestControllers\LivroFisicoControllerTest.php
