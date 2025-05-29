@@ -73,6 +73,18 @@ O projeto foi desenvolvido com foco em boas práticas de programação, utilizan
 
 ---
 
+## Testes unitários
+
+É necessários instalar o PHPUNIT para conseguir realizar os testes. E foi feito o "gitgnore" da pasta "vendor" que não está no repositório deste projeto, sendo necessário a instalação do mesmo.
+
+### Comandos para realizar os testes pelo terminal
+
+  - vendor\bin\phpunit tests\EbookTest.php
+  - vendor\bin\phpunit tests\LivroFisicoTest.php
+  - vendor\bin\phpunit tests\GeneroTest.php
+
+---
+
 ## Licença
 
 Este projeto é livre para fins acadêmicos e de aprendizado.
