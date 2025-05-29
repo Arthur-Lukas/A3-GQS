@@ -75,13 +75,16 @@ O projeto foi desenvolvido com foco em boas práticas de programação, utilizan
 
 ## Testes unitários
 
-É necessários instalar o PHPUNIT para conseguir realizar os testes. E foi feito o "gitgnore" da pasta "vendor" que não está no repositório deste projeto, sendo necessário a instalação do mesmo.
+É necessários instalar o PHPUNIT para conseguir realizar os testes. E foi feito o "gitgnore" da pasta "vendor" que não está no repositório deste projeto, sendo necessário a instalação do mesmo. A instalação do vendor pode ser feita no terminal mesmo, basta dar o comando "composer install" na raiz do projeto.
 
 ### Comandos para realizar os testes pelo terminal
 
-  - vendor\bin\phpunit tests\EbookTest.php
-  - vendor\bin\phpunit tests\LivroFisicoTest.php
-  - vendor\bin\phpunit tests\GeneroTest.php
+  - vendor/bin/phpunit tests/TestModels/EbookTest.php
+  - vendor/bin/phpunit tests/TestModels/LivroFisicoTest.php
+  - vendor/bin/phpunit tests/TestModels/GeneroTest.php
+  - vendor\bin\phpunit tests\TestControllers\GeneroControllerTest.php
+  - vendor\bin\phpunit tests\TestControllers\EbookControllerTest.php
+  - vendor\bin\phpunit tests\TestControllers\LivroFisicoControllerTest.php
 
 ---
 
