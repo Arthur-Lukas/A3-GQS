@@ -1,14 +1,22 @@
-<!-- filepath: c:\xampp\htdocs\ProjetoLimpo\views\cadastrar_livro_fisico.php -->
 <?php
 require_once '../../vendor/autoload.php';
+
 use App\controllers\LivroFisicoController;
 use App\controllers\GeneroController;
-use App\controllers\UsuarioController;
+use App\config\Conexao;
+
+$pdo = Conexao::conectar();
+$repoGenero = new \App\repositories\GeneroRepository($pdo);
+$repoLivroFisico = new \App\repositories\LivroFisicoRepository($pdo);
+
+$controllerGenero = new GeneroController($repoGenero);
+$controllerLivroFisico = new LivroFisicoController($repoLivroFisico);
+
 $mensagem = '';
 
 try {
     // Buscar todos os gêneros para exibição no select
-    $generos = GeneroController::listarGeneros();
+    $generos = $controllerGenero->listarGeneros();
 } catch (Exception $e) {
     $mensagem = "<p class='error'>Erro ao carregar gêneros: " . htmlspecialchars($e->getMessage()) . "</p>";
 }
@@ -16,21 +24,26 @@ try {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titulo = trim($_POST['titulo']);
     $autor = trim($_POST['autor']);
-    $lancamento = $_POST['lancamento'];
-    $preco = $_POST['preco'];
-    $id_genero = $_POST['id_genero'];
+    $lancamento = filter_var($_POST['lancamento'], FILTER_VALIDATE_INT);
+    $preco = filter_var($_POST['preco'], FILTER_VALIDATE_FLOAT);
+    $id_genero = filter_var($_POST['id_genero'], FILTER_VALIDATE_INT);
 
-    // Validação: autor só pode conter letras, espaços, apóstrofos, hífens e pontos
+    // Validação de dados
     if (!preg_match('/^[\p{L}\s\'\-\.]+$/u', $autor)) {
         $mensagem = "<p class='error'>O campo Autor deve conter apenas letras, espaços, apóstrofos, hífens e pontos!</p>";
-    } elseif (empty($titulo) || empty($autor) || empty($lancamento) || empty($preco) || empty($id_genero)) {
+    } elseif (!$titulo || !$autor || !$lancamento || !$preco || !$id_genero) {
         $mensagem = "<p class='error'>Todos os campos são obrigatórios!</p>";
     } elseif ($lancamento <= 0 || $preco <= 0) {
         $mensagem = "<p class='error'>Ano de lançamento e preço devem ser positivos!</p>";
     } else {
         try {
-            LivroFisicoController::cadastrarLivroFisico($titulo, $autor, $lancamento, $preco, $id_genero);
-            $mensagem = "<p class='success'>Livro cadastrado com sucesso!</p>";
+            $resultado = $controllerLivroFisico->cadastrarLivroFisico($titulo, $autor, $lancamento, $preco, $id_genero);
+
+            if ($resultado === true) {
+                $mensagem = "<p class='success'>Livro cadastrado com sucesso!</p>";
+            } else {
+                $mensagem = "<p class='error'>Erro ao cadastrar livro: " . htmlspecialchars($resultado['error'] ?? 'Erro desconhecido') . "</p>";
+            }
         } catch (Exception $e) {
             $mensagem = "<p class='error'>Erro ao cadastrar livro: " . htmlspecialchars($e->getMessage()) . "</p>";
         }
@@ -62,10 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="autor" id="autor" required>
 
             <label for="lancamento">Ano de Lançamento:</label>
-            <input type="number" name="lancamento" id="lancamento" required>
+            <input type="number" name="lancamento" id="lancamento" required min="1">
 
             <label for="preco">Preço:</label>
-            <input type="number" name="preco" id="preco" step="0.01" required>
+            <input type="number" name="preco" id="preco" step="0.01" required min="0.01">
 
             <label for="id_genero">Gênero:</label>
             <select name="id_genero" id="id_genero" required>

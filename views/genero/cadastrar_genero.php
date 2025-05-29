@@ -1,7 +1,8 @@
 <?php
 
 require_once '../../vendor/autoload.php';
-use App\controllers\GeneroController;   
+use App\controllers\GeneroController;
+use App\repositories\GeneroRepository;
 
 $mensagem = '';
 
@@ -15,8 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mensagem = "<p class='error'>O nome do gênero é obrigatório!</p>";
     } else {
         try {
+            // Instancia repositório e controller uma única vez
+            $repo = new GeneroRepository();
+            $controller = new GeneroController($repo);
+
+            // Obtém lista de gêneros existentes
+            $generosExistentes = $controller->listarGeneros();
+
             // Verifica se já existe um gênero com esse nome
-            $generosExistentes = GeneroController::listarGeneros();
             $jaExiste = false;
             foreach ($generosExistentes as $genero) {
                 if (mb_strtolower(trim($genero['nome'])) === mb_strtolower($nome)) {
@@ -24,11 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     break;
                 }
             }
+
             if ($jaExiste) {
                 $mensagem = "<p class='error'>Este gênero já está cadastrado!</p>";
             } else {
-                GeneroController::cadastrarGenero($nome);
-                $mensagem = "<p class='success'>Gênero cadastrado com sucesso!</p>";
+                // Cadastra gênero
+                $resultado = $controller->cadastrarGenero($nome);
+                $mensagem = "<p class='success'>{$resultado['mensagem']}</p>";
             }
         } catch (Exception $e) {
             $mensagem = "<p class='error'>Erro ao cadastrar gênero: " . htmlspecialchars($e->getMessage()) . "</p>";
@@ -51,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header>
 
     <main class="form-container">
-        <?php echo $mensagem; ?>
+        <?= $mensagem; ?>
         <form method="POST" class="form">
             <label for="nome">Nome do Gênero:</label>
             <input type="text" name="nome" id="nome" aria-label="Nome do Gênero" required>

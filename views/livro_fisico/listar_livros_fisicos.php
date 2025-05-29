@@ -1,11 +1,21 @@
 <?php
 require_once __DIR__ . '/../../vendor/autoload.php';
+
 use App\controllers\LivroFisicoController;
+use App\config\Conexao;
+
+$pdo = Conexao::conectar();
+$repoLivroFisico = new \App\repositories\LivroFisicoRepository($pdo);
+$controllerLivroFisico = new LivroFisicoController($repoLivroFisico);
+
+$mensagem = '';
+$livros = [];
 
 try {
-    $livros = LivroFisicoController::listarLivrosFisicos();
+    // Buscar todos os livros físicos para exibição
+    $livros = $controllerLivroFisico->listarLivrosFisicos();
 } catch (Exception $e) {
-    $erro = "Erro ao listar livros físicos: " . htmlspecialchars($e->getMessage());
+    $mensagem = "<p class='error'>Erro ao listar livros físicos: " . htmlspecialchars($e->getMessage()) . "</p>";
 }
 ?>
 
@@ -23,9 +33,9 @@ try {
     </header>
 
     <main class="list-container">
-        <?php if (isset($erro)): ?>
-            <p class="error"><?= $erro ?></p>
-        <?php elseif (empty($livros)): ?>
+        <?= $mensagem ?>
+
+        <?php if (empty($livros)): ?>
             <p class="info">Nenhum livro físico cadastrado.</p>
         <?php else: ?>
             <table class="table">
@@ -46,8 +56,8 @@ try {
                             <td><?= htmlspecialchars($livro['titulo']) ?></td>
                             <td><?= htmlspecialchars($livro['autor']) ?></td>
                             <td><?= htmlspecialchars($livro['lancamento']) ?></td>
-                            <td><?= htmlspecialchars($livro['preco']) ?></td>
-                            <td><?= htmlspecialchars($livro['nome_genero']) ?></td>
+                            <td><?= htmlspecialchars(number_format($livro['preco'], 2, ',', '.')) ?></td>
+                            <td><?= htmlspecialchars($livro['nome_genero'] ?? '') ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

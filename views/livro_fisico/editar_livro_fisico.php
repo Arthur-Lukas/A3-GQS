@@ -1,53 +1,63 @@
 <?php
 require_once __DIR__ . '/../../vendor/autoload.php';
+
 use App\controllers\GeneroController;
 use App\controllers\LivroFisicoController;
+use App\config\Conexao;
+
+$pdo = Conexao::conectar();
+$repoGenero = new \App\repositories\GeneroRepository($pdo);
+$repoLivroFisico = new \App\repositories\LivroFisicoRepository($pdo);
+
+$controllerGenero = new GeneroController($repoGenero);
+$controllerLivroFisico = new LivroFisicoController($repoLivroFisico);
 
 $mensagem = '';
 $livros = [];
 $generos = [];
+$livro = null;
 
 try {
-    $generos = GeneroController::listarGeneros();
-    $livros = LivroFisicoController::listarLivrosFisicos();
+    $generos = $controllerGenero->listarGeneros();
+    $livros = $controllerLivroFisico->listarLivrosFisicos();
 } catch (Exception $e) {
     $mensagem = "<p class='error'>Erro ao carregar dados: " . htmlspecialchars($e->getMessage()) . "</p>";
 }
 
-$livro = null;
-if (isset($_GET['id'])) {
-    try {
-        $livro = LivroFisicoController::buscarPorId($_GET['id']);
-    } catch (Exception $e) {
-        $mensagem = "<p class='error'>Erro ao carregar o livro: " . htmlspecialchars($e->getMessage()) . "</p>";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
+    $titulo = trim($_POST['titulo'] ?? '');
+    $autor = trim($_POST['autor'] ?? '');
+    $lancamento = filter_var($_POST['lancamento'], FILTER_VALIDATE_INT);
+    $preco = filter_var($_POST['preco'], FILTER_VALIDATE_FLOAT);
+    $id_genero = filter_var($_POST['id_genero'], FILTER_VALIDATE_INT);
+
+    if (!$id || !$titulo || !$autor || !$lancamento || !$preco || !$id_genero) {
+        $mensagem = "<p class='error'>Todos os campos são obrigatórios!</p>";
+    } elseif ($lancamento <= 0 || $preco <= 0) {
+        $mensagem = "<p class='error'>Ano de lançamento e preço devem ser positivos!</p>";
+    } else {
+        try {
+            $resultado = $controllerLivroFisico->editarLivroFisico($id, $titulo, $autor, $lancamento, $preco, $id_genero);
+
+            if ($resultado === true) {
+                $mensagem = "<p class='success'>Livro atualizado com sucesso!</p>";
+                $livros = $controllerLivroFisico->listarLivrosFisicos();
+                $livro = $controllerLivroFisico->buscarPorId($id);
+            } else {
+                $mensagem = "<p class='error'>Erro ao atualizar livro: " . htmlspecialchars($resultado['error'] ?? 'Erro desconhecido') . "</p>";
+            }
+        } catch (Exception $e) {
+            $mensagem = "<p class='error'>Erro ao atualizar livro: " . htmlspecialchars($e->getMessage()) . "</p>";
+        }
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id'] ?? null;
-    $titulo = trim($_POST['titulo'] ?? '');
-    $autor = trim($_POST['autor'] ?? '');
-    $lancamento = trim($_POST['lancamento'] ?? '');
-    $preco = trim($_POST['preco'] ?? '');
-    $id_genero = $_POST['id_genero'] ?? '';
-
-    // Validação dos campos numéricos
-    if (
-        !ctype_digit($lancamento) || (int)$lancamento <= 0 ||
-        !is_numeric($preco) || $preco <= 0
-    ) {
-        $mensagem = "<p class='error'>Ano de lançamento deve ser inteiro positivo e preço deve ser um número positivo!</p>";
-    } elseif ($id && $titulo && $autor && $lancamento && $preco && $id_genero) {
-        try {
-            LivroFisicoController::editarLivroFisico($id, $titulo, $autor, $lancamento, $preco, $id_genero);
-            $mensagem = "<p class='success'>Livro atualizado com sucesso!</p>";
-            $livros = LivroFisicoController::listarLivrosFisicos();
-            $livro = LivroFisicoController::buscarPorId($id);
-        } catch (Exception $e) {
-            $mensagem = "<p class='error'>Erro ao atualizar o livro: " . htmlspecialchars($e->getMessage()) . "</p>";
-        }
-    } else {
-        $mensagem = "<p class='error'>Todos os campos são obrigatórios.</p>";
+if (isset($_GET['id'])) {
+    try {
+        $livro = $controllerLivroFisico->buscarPorId(filter_var($_GET['id'], FILTER_VALIDATE_INT));
+    } catch (Exception $e) {
+        $mensagem = "<p class='error'>Erro ao carregar o livro: " . htmlspecialchars($e->getMessage()) . "</p>";
     }
 }
 ?>
@@ -79,17 +89,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" name="autor" id="autor" value="<?= htmlspecialchars($livro['autor']) ?>" required>
 
                 <label for="lancamento">Ano de Lançamento:</label>
-                <input type="text" name="lancamento" id="lancamento" value="<?= htmlspecialchars($livro['lancamento']) ?>" required>
+                <input type="number" name="lancamento" id="lancamento" value="<?= htmlspecialchars($livro['lancamento']) ?>" required min="1">
 
                 <label for="preco">Preço:</label>
-                <input type="text" name="preco" id="preco" value="<?= htmlspecialchars($livro['preco']) ?>" required>
+                <input type="number" name="preco" id="preco" value="<?= htmlspecialchars($livro['preco']) ?>" required min="0.01" step="0.01">
 
                 <label for="id_genero">Gênero:</label>
                 <select name="id_genero" id="id_genero" required>
-                    <option value="">Selecione o gênero</option>
                     <?php foreach ($generos as $genero): ?>
-                        <option value="<?= htmlspecialchars($genero['id']) ?>"
-                            <?= ($livro['id_genero'] == $genero['id']) ? 'selected' : '' ?>>
+                        <option value="<?= htmlspecialchars($genero['id']) ?>" <?= ($livro['id_genero'] == $genero['id']) ? 'selected' : '' ?>>
                             <?= htmlspecialchars($genero['nome']) ?>
                         </option>
                     <?php endforeach; ?>
@@ -137,9 +145,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </tbody>
             </table>
         <?php endif; ?>
-        <div class="actions">
-            <a href="../../index.html" class="btn-secondary">Voltar ao Menu</a>
-        </div>
     </div>
 </body>
 </html>

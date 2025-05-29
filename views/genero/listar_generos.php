@@ -3,7 +3,9 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 use App\controllers\GeneroController;
 
 try {
-    $generos = GeneroController::listarGeneros();
+    $repo = new \App\repositories\GeneroRepository(); // Instancia o repositório
+    $controller = new GeneroController($repo); // Passa o repositório para o controller
+    $generos = $controller->listarGeneros(); // Chama o método corretamente
 } catch (Exception $e) {
     $erro = "Erro ao listar gêneros: " . htmlspecialchars($e->getMessage());
 }

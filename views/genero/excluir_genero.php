@@ -3,50 +3,61 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 use App\controllers\GeneroController;
 use App\controllers\LivroFisicoController;
+use App\repositories\GeneroRepository;
+use App\config\Conexao;
+
+$pdo = Conexao::conectar();
+$repoGenero = new GeneroRepository($pdo);
+$controllerGenero = new GeneroController($repoGenero);
+$repoLivroFisico = new \App\repositories\LivroFisicoRepository($pdo);
+$controllerLivroFisico = new LivroFisicoController($repoLivroFisico);
 
 $mensagem = '';
 
 try {
     // Buscar todos os gêneros para exibição
-    $generos = GeneroController::listarGeneros();
+    $generos = $controllerGenero->listarGeneros();
 } catch (Exception $e) {
     $mensagem = "<p class='error'>Erro ao listar gêneros: " . htmlspecialchars($e->getMessage()) . "</p>";
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id'] ?? null;
+    $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
 
-    if ($id) {
-        // Verifica se o ID existe na lista de gêneros
-        $generoExiste = false;
-        foreach ($generos as $genero) {
-            if ($genero['id'] == $id) {
-                $generoExiste = true;
-                break;
+    if (!$id) {
+        $mensagem = "<p class='error'>ID inválido. Digite um número válido.</p>";
+    } else {
+        try {
+            // Verificar se o gênero existe
+            $generoExiste = false;
+            foreach ($generos as $genero) {
+                if ($genero['id'] == $id) {
+                    $generoExiste = true;
+                    break;
+                }
             }
-        }
 
-        if (!$generoExiste) {
-            $mensagem = "<p class='error'>Gênero não encontrado, digite uma opção viável.</p>";
-        } else {
-            try {
+            if (!$generoExiste) {
+                $mensagem = "<p class='error'>Gênero não encontrado. Digite uma opção válida.</p>";
+            } else {
                 // Verificar se há livros associados ao gênero
-                $livrosRelacionados = LivroFisicoController::verificarLivrosPorGenero($id);
+                $livrosRelacionados = $controllerLivroFisico->verificarLivrosPorGenero($id);
 
                 if ($livrosRelacionados > 0) {
                     $mensagem = "<p class='error'>Não é possível excluir. Há livros associados a este gênero!</p>";
                 } else {
-                    GeneroController::excluirGenero($id);
-                    $mensagem = "<p class='success'>Gênero excluído com sucesso!</p>";
-                    // Atualizar a lista de gêneros após exclusão
-                    $generos = GeneroController::listarGeneros();
+                    $resultado = $controllerGenero->excluirGenero($id);
+                    if ($resultado === true) {
+                        $mensagem = "<p class='success'>Gênero excluído com sucesso!</p>";
+                        $generos = $controllerGenero->listarGeneros(); // Atualiza a lista de gêneros
+                    } else {
+                        $mensagem = "<p class='error'>Erro ao excluir gênero.</p>";
+                    }
                 }
-            } catch (Exception $e) {
-                $mensagem = "<p class='error'>Erro ao excluir gênero: " . htmlspecialchars($e->getMessage()) . "</p>";
             }
+        } catch (Exception $e) {
+            $mensagem = "<p class='error'>Erro ao excluir gênero: " . htmlspecialchars($e->getMessage()) . "</p>";
         }
-    } else {
-        $mensagem = "<p class='error'>ID inválido.</p>";
     }
 }
 ?>
@@ -98,6 +109,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </table>
         <?php endif; ?>
     </main>
-
 </body>
 </html>

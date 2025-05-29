@@ -1,13 +1,24 @@
 <?php
+
 require_once __DIR__ . '/../../vendor/autoload.php';
-use App\controllers\GeneroController;
+
 use App\controllers\EbookController;
+use App\controllers\GeneroController;
+use App\repositories\EbookRepository;
+use App\repositories\GeneroRepository;
+
+$pdo = \App\config\Conexao::conectar();
+
+$repoGenero = new GeneroRepository($pdo);
+$controllerGenero = new GeneroController($repoGenero);
+
+$repoEbook = new EbookRepository($pdo);
+$controllerEbook = new EbookController($repoEbook);
 
 $mensagem = '';
 
 try {
-    // Buscar todos os gêneros para exibição no select
-    $generos = GeneroController::listarGeneros();
+    $generos = $controllerGenero->listarGeneros();
 } catch (Exception $e) {
     $mensagem = "<p class='error'>Erro ao carregar gêneros: " . htmlspecialchars($e->getMessage()) . "</p>";
 }
@@ -19,21 +30,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $paginas = $_POST['paginas'];
     $id_genero = $_POST['id_genero'];
 
-    // Validação: autor só pode conter letras, espaços e caracteres especiais comuns de nomes
-    if (!preg_match('/^[\p{L}\s\'\-\.]+$/u', $autor)) {
-        $mensagem = "<p class='error'>O campo Autor deve conter apenas letras, espaços, apóstrofos, hífens e pontos!</p>";
-    } elseif (empty($titulo) || empty($autor) || empty($lancamento) || empty($paginas) || empty($id_genero)) {
-        $mensagem = "<p class='error'>Todos os campos são obrigatórios!</p>";
-    } elseif ($lancamento <= 0 || $paginas <= 0) {
-        $mensagem = "<p class='error'>Os números devem ser positivos!</p>";
+    $validacaoErro = validarDadosEbook($titulo, $autor, $lancamento, $paginas, $id_genero);
+
+    if ($validacaoErro) {
+        $mensagem = "<p class='error'>{$validacaoErro}</p>";
     } else {
         try {
-            EbookController::cadastrarEbook($titulo, $autor, $lancamento, $paginas, $id_genero);
+            $controllerEbook->cadastrarEbook($titulo, $autor, $lancamento, $paginas, $id_genero);
             $mensagem = "<p class='success'>E-book cadastrado com sucesso!</p>";
         } catch (Exception $e) {
             $mensagem = "<p class='error'>Erro ao cadastrar e-book: " . htmlspecialchars($e->getMessage()) . "</p>";
         }
     }
+}
+
+/**
+ * Função de validação dos dados
+ */
+function validarDadosEbook($titulo, $autor, $lancamento, $paginas, $id_genero): ?string {
+    if (!preg_match('/^[\p{L}\s\'\-\.]+$/u', $autor)) {
+        return "O campo Autor deve conter apenas letras, espaços, apóstrofos, hífens e pontos!";
+    }
+    if (empty($titulo) || empty($autor) || empty($lancamento) || empty($paginas) || empty($id_genero)) {
+        return "Todos os campos são obrigatórios!";
+    }
+    if ($lancamento <= 0 || $paginas <= 0) {
+        return "Os números devem ser positivos!";
+    }
+    return null;
+}
+
+/**
+ * Função para renderizar opções de gêneros
+ */
+function renderizarOpcoesGenero(array $generos): string {
+    if (empty($generos)) {
+        return '<option value="" disabled>Nenhum gênero disponível</option>';
+    }
+
+    $html = '';
+    foreach ($generos as $genero) {
+        $html .= '<option value="' . htmlspecialchars($genero['id']) . '">' . htmlspecialchars($genero['nome']) . '</option>';
+    }
+    return $html;
 }
 ?>
 
@@ -68,13 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <label for="id_genero">Gênero:</label>
             <select name="id_genero" id="id_genero" required>
-                <?php if (!empty($generos)): ?>
-                    <?php foreach ($generos as $genero): ?>
-                        <option value="<?= htmlspecialchars($genero['id']) ?>"><?= htmlspecialchars($genero['nome']) ?></option>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <option value="" disabled>Nenhum gênero disponível</option>
-                <?php endif; ?>
+                <?= renderizarOpcoesGenero($generos) ?>
             </select>
 
             <div class="form-actions">

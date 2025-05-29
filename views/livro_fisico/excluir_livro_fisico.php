@@ -1,25 +1,36 @@
 <?php
 require_once __DIR__ . '/../../vendor/autoload.php';
+
 use App\controllers\LivroFisicoController;
+use App\config\Conexao;
+
+$pdo = Conexao::conectar();
+$repoLivroFisico = new \App\repositories\LivroFisicoRepository($pdo);
+$controllerLivroFisico = new LivroFisicoController($repoLivroFisico);
 
 $mensagem = '';
+$livros = [];
 
 try {
     // Buscar todos os livros físicos para exibição
-    $livros = LivroFisicoController::listarLivrosFisicos();
+    $livros = $controllerLivroFisico->listarLivrosFisicos();
 } catch (Exception $e) {
     $mensagem = "<p class='error'>Erro ao listar livros físicos: " . htmlspecialchars($e->getMessage()) . "</p>";
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id'] ?? null;
+    $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
 
     if ($id) {
         try {
-            LivroFisicoController::excluirLivroFisico($id);
-            $mensagem = "<p class='success'>Livro físico excluído com sucesso!</p>";
-            // Atualizar a lista de livros após exclusão
-            $livros = LivroFisicoController::listarLivrosFisicos();
+            $resultado = $controllerLivroFisico->excluirLivroFisico($id);
+            
+            if ($resultado === true) {
+                $mensagem = "<p class='success'>Livro físico excluído com sucesso!</p>";
+                $livros = $controllerLivroFisico->listarLivrosFisicos(); // Atualizar lista após exclusão
+            } else {
+                $mensagem = "<p class='error'>Erro ao excluir livro físico: " . htmlspecialchars($resultado['error'] ?? 'Erro desconhecido') . "</p>";
+            }
         } catch (Exception $e) {
             $mensagem = "<p class='error'>Erro ao excluir livro físico: " . htmlspecialchars($e->getMessage()) . "</p>";
         }
@@ -61,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <a href="../../index.html" class="btn-secondary">Voltar ao Menu</a>
             </div>
         </form>
-        <br>                
+
         <h3>Lista de Livros Físicos Disponíveis:</h3>
         <?php if (empty($livros)): ?>
             <p class="info">Nenhum livro físico cadastrado.</p>

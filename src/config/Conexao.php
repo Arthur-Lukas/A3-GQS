@@ -1,18 +1,26 @@
 <?php
 namespace App\config;
 
-class Conexao {
-    private static $host = 'localhost';
-    private static $dbname = 'db_biblioteca';
-    private static $user = 'root';
-    private static $password = '';
+use PDO;
+use PDOException;
 
-    public static function conectar() {
-        try {
-            return new \PDO("mysql:host=" . self::$host . ";dbname=" . self::$dbname, self::$user, self::$password);
-        } catch (\PDOException $e) {
-            die("Erro na conexão: " . $e->getMessage());
+class Conexao
+{
+    private static $instancia = null;
+
+    private function __construct() {}
+
+    public static function conectar()
+    {
+        if (self::$instancia === null) {
+            try {
+                self::$instancia = new PDO('mysql:host=localhost;dbname=db_biblioteca', 'root', '');
+                self::$instancia->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                die("Erro de conexão: " . $e->getMessage());
+            }
         }
+        return self::$instancia;
     }
 }
 ?>

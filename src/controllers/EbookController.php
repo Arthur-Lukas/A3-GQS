@@ -1,106 +1,40 @@
 <?php
 namespace App\controllers;
 
-use App\config\Conexao;
-use App\models\Ebook;
-use PDO;
-use PDOException;
+use App\repositories\EbookRepository;
 
 class EbookController
 {
-    public static function cadastrarEbook($titulo, $autor, $lancamento, $paginas, $id_genero)
+    private EbookRepository $repo;
+
+    public function __construct(EbookRepository $repo)
     {
-        try {
-            $conexao = Conexao::conectar();
-            $sql = "INSERT INTO ebooks (titulo, autor, lancamento, paginas, id_genero) 
-                    VALUES (:titulo, :autor, :lancamento, :paginas, :id_genero)";
-            $stmt = $conexao->prepare($sql);
-            $stmt->bindParam(':titulo', $titulo);
-            $stmt->bindParam(':autor', $autor);
-            $stmt->bindParam(':lancamento', $lancamento);
-            $stmt->bindParam(':paginas', $paginas);
-            $stmt->bindParam(':id_genero', $id_genero);
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            error_log("Erro ao cadastrar eBook: " . $e->getMessage());
-            return false;
-        }
+        $this->repo = $repo;
     }
 
-    public static function listarEbooks()
+    public function cadastrarEbook(string $titulo, string $autor, string $lancamento, int $paginas, int $id_genero): array
     {
-        try {
-            $conexao = Conexao::conectar();
-            $sql = "SELECT e.*, g.nome AS nome_genero
-                    FROM ebooks e
-                    JOIN genero g ON e.id_genero = g.id";
-            $stmt = $conexao->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            error_log("Erro ao listar eBooks: " . $e->getMessage());
-            return [];
-        }
+        return $this->repo->cadastrar($titulo, $autor, $lancamento, $paginas, $id_genero);
     }
 
-    public static function editarEbook($id, $titulo, $autor, $lancamento, $paginas, $id_genero)
+    public function listarEbooks(): array
     {
-        try {
-            $conexao = Conexao::conectar();
-            $sql = "UPDATE ebooks 
-                    SET titulo = :titulo, autor = :autor, lancamento = :lancamento, paginas = :paginas, id_genero = :id_genero 
-                    WHERE id = :id";
-            $stmt = $conexao->prepare($sql);
-            $stmt->bindParam(':id', $id);
-            $stmt->bindParam(':titulo', $titulo);
-            $stmt->bindParam(':autor', $autor);
-            $stmt->bindParam(':lancamento', $lancamento);
-            $stmt->bindParam(':paginas', $paginas);
-            $stmt->bindParam(':id_genero', $id_genero);
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            error_log("Erro ao editar eBook: " . $e->getMessage());
-            return false;
-        }
+        return $this->repo->listarTodos();
     }
 
-    public static function excluirEbook($id)
+    public function editarEbook(int $id, string $titulo, string $autor, string $lancamento, int $paginas, int $id_genero): array
     {
-        try {
-            $conexao = Conexao::conectar();
-            $sql = "DELETE FROM ebooks WHERE id = :id";
-            $stmt = $conexao->prepare($sql);
-            $stmt->bindParam(':id', $id);
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            error_log("Erro ao excluir eBook: " . $e->getMessage());
-            return false;
-        }
+        return $this->repo->editar($id, $titulo, $autor, $lancamento, $paginas, $id_genero);
     }
 
-    public static function buscarPorId($id)
+    public function excluirEbook(int $id): bool
     {
-        try {
-            $conexao = Conexao::conectar();
-            $sql = "SELECT * FROM ebooks WHERE id = :id";
-            $stmt = $conexao->prepare($sql);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            $stmt->execute();
-            $ebook = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $this->repo->excluir($id);
+    }
 
-            if (!$ebook) {
-                http_response_code(404);
-                return ["error" => "Livro não encontrado"];
-            }
-
-            return $ebook;
-        } catch (PDOException $e) {
-            error_log("Erro ao buscar eBook por ID: " . $e->getMessage());
-            return ["error" => "Erro ao acessar o banco"];
-        }
+    public function obterEbookPorId(int $id): ?array
+    {
+        return $this->repo->buscarPorId($id) ?: null;
     }
 }
 ?>
