@@ -49,12 +49,7 @@ INSERT INTO `ebooks` (`id`, `titulo`, `autor`, `lancamento`, `id_genero`, `pagin
 (6, 'A revolução dos bichos', 'George Orwell', 1945, 5, 100),
 (7, 'O código da Vinci', 'Dan Brown', 2003, 5, 100),
 (8, 'A cabana', 'William P. Young', 2007, 4, 100),
-(9, 'A culpa é das estrelas', 'John Green', 2012, 1, NULL),
-(10, 'Harry Potter e a Pedra Filosofal', 'J.K. Rowling', 1997, 3, 223),
-(11, 'O Hobbit', 'J.R.R. Tolkien', 1937, 3, 310),
-(12, 'Orgulho e Preconceito', 'Jane Austen', 1813, 1, 279),
-(13, 'O Senhor das Moscas', 'William Golding', 1954, 9, 224),
-(14, 'O Diário de Anne Frank', 'Anne Frank', 1947, 11, 283)
+(9, 'A culpa é das estrelas', 'John Green', 2012, 1, NULL);
 
 -- --------------------------------------------------------
 
