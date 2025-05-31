@@ -48,7 +48,7 @@ O projeto foi criado como exercício acadêmico para aplicar conhecimentos bási
 importe o arquivo db_biblioteca que está na pasta script.sql.
 
 4. **Configure a conexão JDBC**:
-Pegue o driver mysql_conector que está na pasta 'resourses' e adicione ao classpath/libraries do projeto.
+Pegue o driver mysql_conector que está na pasta 'resourses' e adicione ao classpath/libraries do projeto na sua IDE (normalmente VS-CODE).
 
 5. **Inclua o conector no classpath**:
 No arquivo de factory/Conexao.java, ajuste as variáveis de conexão (host, database, user, password) conforme seu ambiente (normalmente não precisa mexer nisso).
